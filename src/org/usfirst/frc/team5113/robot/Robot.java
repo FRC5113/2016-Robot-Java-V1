@@ -7,6 +7,7 @@ import drive.MotorManager;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Timer;
+//Auto-added, not sure if we actually need them... but whatever
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -66,7 +67,7 @@ public class Robot extends IterativeRobot
     /**
      * This function is called periodically during operator control
      */
-    public void teleopPeriodic() 
+    public void teleopPeriodic()
     {
         
     }
