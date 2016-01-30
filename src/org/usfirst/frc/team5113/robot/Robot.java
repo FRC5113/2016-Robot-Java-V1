@@ -17,13 +17,16 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * creating this project, you must also update the manifest file in the resource
  * directory.
  */
+
+//This is the main part of the code. It is where the robot looks first
 public class Robot extends IterativeRobot 
 {
-	
+	//This was auto-generated. Not sure if we need it
     final String defaultAuto = "Default";
     final String customAuto = "My Auto";
     String autoSelected;
     SendableChooser chooser;
+    
     
 	private MotorManager motorManagers;// this gives us access to the Drive class
 	private DriveController controller;
