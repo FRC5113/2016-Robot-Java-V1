@@ -38,8 +38,10 @@ public class Robot extends IterativeRobot
      */
     public void robotInit() 
     {       
-        
         controller = new JoystickController();
+        controller.init();
+        motorManagers = new MotorManager();
+        motorManagers.init();
     }
     
 	/**
@@ -69,7 +71,7 @@ public class Robot extends IterativeRobot
      */
     public void teleopPeriodic()
     {
-        
+        controller.update(motorManagers);
     }
     
     /**
