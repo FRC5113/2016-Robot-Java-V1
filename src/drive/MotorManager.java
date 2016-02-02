@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.RobotDrive;
 
 public class MotorManager 
@@ -15,6 +16,8 @@ public class MotorManager
 	
 	private CANTalon leftMotor;
 	private CANTalon rightMotor; 
+	
+	private Encoder encoder;
 	
 	RobotDrive roboDrive;
 	
@@ -36,5 +39,15 @@ public class MotorManager
 		
 		leftMotor.set(leftPower);
 		rightMotor.set(rightPower);
+	}
+	
+	public int getEncoderValues(Encoder e)
+	{
+		encoder = e;
+		//Not sure which one we should use.
+		//Returns raw value from the encoder.
+		//return encoder.getRaw();
+		//Returns the current count from the encoder.
+		return encoder.get();
 	}
 }
