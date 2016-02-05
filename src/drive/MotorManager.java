@@ -9,13 +9,15 @@ import edu.wpi.first.wpilibj.RobotDrive;
 
 public class MotorManager 
 {
-	/*ayylmao
+	/* ayylmao
 	 * dank memes
 	 * Copy Pasta
-	*/
+	 */
 	
 	private CANTalon leftMotor;
-	private CANTalon rightMotor; 
+	private CANTalon rightMotor;
+	private CANTalon leftTake;
+	private CANTalon rightTake;
 	
 	//We are assuming this is a CAN
 	private CANTalon tiltMotor;
@@ -32,8 +34,14 @@ public class MotorManager
 		rightMotor = new CANTalon(1337);//leet
 		rightMotor.set(0);
 		
-		tiltMotor = new CANTalon(5113);
+		tiltMotor = new CANTalon(5113);//us
 		tiltMotor.set(0);
+		
+		leftTake = new CANTalon(8999);//not quite 9000
+		leftTake.set(0);
+		
+		rightTake = new CANTalon(9001);//over 9000
+		rightTake.set(0);
 		
 		roboDrive = new RobotDrive(leftMotor, rightMotor);
 	}
@@ -61,5 +69,11 @@ public class MotorManager
 		//return encoder.getRaw();
 		//Returns the current count from the encoder.
 		return encoder.get();
+	}
+	
+	public void spinShooterWheels(double leftWheel, double rightWheel)
+	{
+		leftTake.set(leftWheel);
+		rightTake.set(rightWheel);
 	}
 }
