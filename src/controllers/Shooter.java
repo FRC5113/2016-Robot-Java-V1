@@ -53,32 +53,23 @@ public class Shooter
 	public void update(MotorManager dr, JoystickController monitor)
 	{
 		manualTilt(dr, monitor);
-		
-		
-		
-		
-		
-		if(monitor.getIntake())
-		{
-			
-		}
-		
-		if(monitor.getShootLow())
-		{
-			
-		}
-		
-		if(monitor.getActivateAutoShoot())
-		{
-			
-		}
+		manualWheels(dr, monitor);
 	}
 	
 	//Get value of buttons for the intake and the shoot low
 	//then set an appropriate value for the respective motor(s)
-	public void manualWheels()
+	public void manualWheels(MotorManager dr, JoystickController monitor)
 	{
-		
+		if(monitor.getIntake())
+		{
+			dr.spinShooterWheels(-0.5, 0.5);
+		}
+		else if(monitor.getShootLow())
+		{
+			dr.spinShooterWheels(0.5,  -0.5);
+		}
+		else
+			dr.spinShooterWheels(0, 0);
 	}
 	
 	public void autoShoot()//Don't worry 'bout this just yet.
