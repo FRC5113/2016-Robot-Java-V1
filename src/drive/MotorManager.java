@@ -17,6 +17,9 @@ public class MotorManager
 	private CANTalon leftMotor;
 	private CANTalon rightMotor; 
 	
+	//We are assuming this is a CAN
+	private CANTalon tiltMotor;
+	
 	private Encoder encoder;
 	
 	RobotDrive roboDrive;
@@ -29,6 +32,9 @@ public class MotorManager
 		rightMotor = new CANTalon(1337);//leet
 		rightMotor.set(0);
 		
+		tiltMotor = new CANTalon(5113);
+		tiltMotor.set(0);
+		
 		roboDrive = new RobotDrive(leftMotor, rightMotor);
 	}
 	
@@ -39,6 +45,12 @@ public class MotorManager
 		
 		leftMotor.set(leftPower);
 		rightMotor.set(rightPower);
+	}
+	
+	//Add in Limit Switches when created
+	public void tilt(double tiltValue)
+	{
+		tiltMotor.set(tiltValue);
 	}
 	
 	public int getEncoderValues(Encoder e)

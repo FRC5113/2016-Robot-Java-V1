@@ -14,7 +14,7 @@ public class JoystickController extends DriveController
 	Joystick leftStick;
 	Joystick rightStick;
 	Joystick monitorStick;
-
+	
 	private JoystickButton reverseControl; 
 	private JoystickButton servo;
 	private JoystickButton tiltDown;
@@ -43,16 +43,16 @@ public class JoystickController extends DriveController
 		
 		if (leftHandedness == 1)
 		{
-		  activateAutoShoot = new JoystickButton(monitorStick, 10);
-		  hookLift = new JoystickButton(monitorStick, 7);
-		  emergencyStop = new JoystickButton(monitorStick, 6);
+			activateAutoShoot = new JoystickButton(monitorStick, 10);
+			hookLift = new JoystickButton(monitorStick, 7);
+			emergencyStop = new JoystickButton(monitorStick, 6);
 		}
-		  else
-		    {
+		else
+		{
 			activateAutoShoot = new JoystickButton(monitorStick, 7);
 		    hookLift = new JoystickButton(monitorStick, 10);
 		    emergencyStop = new JoystickButton(monitorStick, 11);
-		    }
+		}
 		
 	}
 	
