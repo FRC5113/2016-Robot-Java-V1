@@ -23,8 +23,6 @@ public class Shooter
 	
 	private Servo servo1;
 	
-	private CANTalon shooterTilt;
-	
 	private boolean intake;
 	private boolean shootLow;
 	private boolean tiltDown;
@@ -41,7 +39,6 @@ public class Shooter
 		
 		servo1 = new Servo(4234234);//fake
 		
-		shooterTilt = new CANTalon(43242);//fake
 	}
 	
 	
@@ -82,11 +79,11 @@ public class Shooter
 	public void manualTilt(MotorManager dr, JoystickController monitor)
 	{
 		
-		if(monitor.getTiltDown())
+		if(monitor.getTiltDownShoot())
 		{
 			tiltValue = -.5;
 		}
-		else if(monitor.getTiltUp())
+		else if(monitor.getTiltUpShoot())
 		{
 			tiltValue = .5;
 		}
@@ -95,6 +92,6 @@ public class Shooter
 			tiltValue = 0;
 		}
 		
-		dr.tilt(tiltValue);
+		dr.tiltShoot(tiltValue);
 	}
 }

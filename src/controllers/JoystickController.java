@@ -13,82 +13,73 @@ public class JoystickController extends DriveController
 	
 	Joystick leftStick;
 	Joystick rightStick;
-	Joystick monitorStick;
+	Joystick xboxController;
 	
 	private JoystickButton reverseControl; 
 	private JoystickButton servo;
-	private JoystickButton tiltDown;
-	private JoystickButton tiltUp;
+	private JoystickButton tiltDownShoot;
+	private JoystickButton tiltUpShoot;
 	private JoystickButton intake;
 	private JoystickButton shootLow;
 	private JoystickButton activateAutoShoot;
 	private JoystickButton hookLift;
+	private JoystickButton hookDrop;
 	private JoystickButton emergencyStop;
+	private JoystickButton emergencyStop2;
 	
-	private int leftHandedness = 0;
+	
+	
+	private JoystickButton tiltArm;
+	//private JoystickButton tiltDownArm;
+	private JoystickButton tiltJoint;
+	//private JoystickButton tiltDownJoint;
+	
+	//private int leftHandedness = 0;
 	
 	public void init() 
 	{	//The numbers are the USB port that the joysticks are plugged into
 		leftStick = new Joystick(0);//"Beat the devil out of it."
 		rightStick = new Joystick(1);//Ayy Lmao
-		monitorStick = new Joystick(2);//
+		xboxController = new Joystick(2);//RIP DEVIL
+		
+
+//		tiltDownShoot = new JoystickButton(xboxController, 2);
+//		tiltUpShoot = new JoystickButton(xboxController, 3);
 		
 		reverseControl = new JoystickButton(rightStick, 4);
 		
-		servo = new JoystickButton(monitorStick, 1);
-		tiltDown = new JoystickButton(monitorStick, 2);
-		tiltUp = new JoystickButton(monitorStick, 3);
-		intake = new JoystickButton(monitorStick, 4);
-		shootLow = new JoystickButton(monitorStick, 5);
+		servo = new JoystickButton(xboxController, 1);
+		intake = new JoystickButton(xboxController, 4);
+		shootLow = new JoystickButton(xboxController, 5);
+		activateAutoShoot = new JoystickButton(xboxController, 10);
+		hookLift = new JoystickButton(xboxController, 7);
+		hookDrop = new JoystickButton (xboxController, 11);
+		emergencyStop = new JoystickButton(xboxController, 6);
+		emergencyStop2 = new JoystickButton(xboxController, 7);
 		
-		if (leftHandedness == 1)
-		{
-			activateAutoShoot = new JoystickButton(monitorStick, 10);
-			hookLift = new JoystickButton(monitorStick, 7);
-			emergencyStop = new JoystickButton(monitorStick, 6);
-		}
-		else
-		{
-			activateAutoShoot = new JoystickButton(monitorStick, 7);
-		    hookLift = new JoystickButton(monitorStick, 10);
-		    emergencyStop = new JoystickButton(monitorStick, 11);
-		}
+		//tiltUpJoint = new JoystickButton(xboxController, 8);
+		//tiltDownJoint = new JoystickButton(xboxController, 9);
+		/*1 = y
+		 *2 = Right Trigger
+		 *3 = Left Trigger
+		 *4 = x
+		 *5 = b
+		 *10 = a
+		 *6 = Start/Stop at same time
+		 *7 = Left Bumper
+		 *11 = Right Bumper */
 		
-	}
-	
-	public boolean getServo()
-	{
-		return servo.get();
-	}
-	
-	public boolean getTiltDown()
-	{
-		return tiltDown.get(); 	
-	}
-	
-	public boolean getTiltUp()
-	{
-		return tiltUp.get();
-	}
-	
-	public boolean getIntake()
-	{
-		return intake.get();
-	}
-	
-	public boolean getShootLow()
-	{
-		return shootLow.get();
-	}
-	
-	public boolean getActivateAutoShoot()
-	{
-		return activateAutoShoot.get();
-	}
-	
-	public boolean getHookLift()
-	{
-		return hookLift.get(); 
+		//if (leftHandedness == 1)
+		//{
+
+	//	}
+		//else
+		//{
+		//	activateAutoShoot = new JoystickButton(xboxController, 7);
+//		    hookLift = new JoystickButton(xboxController, 10);
+//		    emergencyStop = new JoystickButton(xboxController, 11);
+	//	}
+		
 	}
 	
 	public void update(MotorManager dr) 
@@ -116,7 +107,66 @@ public class JoystickController extends DriveController
 			rightYAxis = -rightYAxis;
 		}
 		
-		dr.tankDrive(leftYAxis, rightYAxis);
+		if(emergencyStop.get() && emergencyStop2.get())
+		{
+			dr.tankDrive(0, 0);
+		}
+		else
+		{
+			dr.tankDrive(leftYAxis, rightYAxis);
+		}
 	}
+	
+	public boolean getServo()
+	{
+		return servo.get();
+	}
+	
+	public double getTiltDownShoot()
+	{
+		return xboxController.getRawAxis(3); 	
+	}
+	
+	public double getTiltUpShoot()
+	{
+		return xboxController.getRawAxis(2);
+	}
+	
+	public boolean getIntake()
+	{
+		return intake.get();
+	}
+	
+	public boolean getShootLow()
+	{
+		return shootLow.get();
+	}
+	
+	public boolean getActivateAutoShoot()
+	{
+		return activateAutoShoot.get();
+	}
+	
+	public boolean getHookLift()
+	{
+		return hookLift.get(); 
+	}
+	
+	public boolean getHookDrop()
+	{
+		return hookDrop.get();
+	}
+	
+	public double getTiltArm()
+	{
+		return xboxController.getRawAxis(1);
+	}
+
+	public double getTiltJoint()
+	{
+		return xboxController.getRawAxis(5);
+	}
+	
+	
 	
 }

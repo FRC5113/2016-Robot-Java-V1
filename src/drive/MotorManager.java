@@ -20,7 +20,13 @@ public class MotorManager
 	private CANTalon rightTake;
 	
 	//We are assuming this is a CAN
-	private CANTalon tiltMotor;
+	private CANTalon tiltMotorShoot;
+	
+	//^Lol, same xD
+	private CANTalon tiltMotorArm;
+	
+	//^ditto
+	private CANTalon tiltMotorJoint;
 	
 	private Encoder encoder;
 	
@@ -34,8 +40,14 @@ public class MotorManager
 		rightMotor = new CANTalon(1337);//leet
 		rightMotor.set(0);
 		
-		tiltMotor = new CANTalon(5113);//us
-		tiltMotor.set(0);
+		tiltMotorShoot = new CANTalon(5113);//us
+		tiltMotorShoot.set(0);
+		
+		tiltMotorArm = new CANTalon(666);//Bob Ross
+		tiltMotorArm.set(0);
+		
+		tiltMotorJoint = new CANTalon(911);//not 9/11
+		tiltMotorJoint.set(0);
 		
 		leftTake = new CANTalon(8999);//not quite 9000
 		leftTake.set(0);
@@ -56,9 +68,19 @@ public class MotorManager
 	}
 	
 	//Add in Limit Switches when created
-	public void tilt(double tiltValue)
+	public void tiltShoot(double tiltValue)
 	{
-		tiltMotor.set(tiltValue);
+		tiltMotorShoot.set(tiltValue);
+	}
+	
+	public void tiltArm(double tiltValue)
+	{
+		tiltMotorArm.set(tiltValue);
+	}
+	
+	public void tiltJoint(double tiltValue)
+	{
+		tiltMotorJoint.set(tiltValue);
 	}
 	
 	public int getEncoderValues(Encoder e)
