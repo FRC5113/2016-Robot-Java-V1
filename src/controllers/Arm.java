@@ -6,56 +6,42 @@ import edu.wpi.first.wpilibj.DigitalInput;
 
 public class Arm
 {
-	private CANTalon baseMotor;
-	private CANTalon joinMotor;
-	private CANTalon winchMotor;
 	
 	private DigitalInput minAngleBase;
 	private DigitalInput maxAngleBase;
 	
-	private boolean tiltUpArm;
-	private boolean tiltDownArm;
-	private boolean tiltUpJoint;
-	private boolean tiltDownJoint;
-	
 	private double tiltValueBase;
 	private double tiltValueJoint;
 	
+	
+	public void init() 
+	{
+		minAngleBase = new DigitalInput(12345);
+		maxAngleBase = new DigitalInput(54321);
+		
+	}
+
+	
+	public void update(MotorManager dr, JoystickController monitor) 
+	{
+		tiltBase(dr, monitor);
+		tiltJoint(dr, monitor);
+		
+	}
+	
 	public void tiltBase(MotorManager dr, JoystickController monitor)
 	{
-		if(monitor.getTiltDownArm())
-		{
-			tiltValueBase = -.5;
-		}
-		else if(monitor.getTiltUpArm())
-		{
-			tiltValueBase = .5;
-		}
-		else
-		{
-			tiltValueBase = 0;
-		}
+		tiltValueBase = monitor.getTiltArm();
 		
 		dr.tiltArm(tiltValueBase);
 	}
 	
 	public void tiltJoint(MotorManager dr, JoystickController monitor)
 	{
-		if(monitor.getTiltDownJoint())
-		{
-			tiltValueJoint = -.5;
-		}
-		else if(monitor.getTiltDownJoint())
-		{
-			tiltValueJoint = .5;
-		}
-		else
-		{
-			tiltValueJoint = 0;
-		}
+		tiltValueJoint = monitor.getTiltJoint();
 		
 		dr.tiltJoint(tiltValueJoint);
-		}
+	}
 	
 	public void moveHook()
 	{
@@ -66,4 +52,5 @@ public class Arm
 	{
 		
 	}
+
 }

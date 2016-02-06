@@ -1,11 +1,11 @@
 
 package org.usfirst.frc.team5113.robot;
 
+import controllers.Arm;
 import controllers.DriveController;
 import controllers.JoystickController;
 import drive.MotorManager;
 import controllers.Shooter;
-
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Timer;
 //Auto-added, not sure if we actually need them... but whatever
@@ -33,6 +33,7 @@ public class Robot extends IterativeRobot
 	private MotorManager motorManagers;// this gives us access to the Drive class
 	private JoystickController controller;
 	private Shooter shoot;
+	private Arm arm;
 	
     /**
      * This function is run when the robot is first started up and should be
@@ -46,6 +47,8 @@ public class Robot extends IterativeRobot
         motorManagers.init();
         shoot = new Shooter();
         shoot.init();
+        arm = new Arm();
+        arm.init();
     }
     
 	/**
@@ -79,6 +82,7 @@ public class Robot extends IterativeRobot
     	//This is another test commit to make sure the mainTop is now cooperating
         controller.update(motorManagers);
         shoot.update(motorManagers, controller);
+        arm.update(motorManagers, controller);
     }
     
     /**
