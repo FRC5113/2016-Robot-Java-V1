@@ -42,7 +42,6 @@ public class Shooter
 	}
 	
 	
-	
 	//Make sure to call this in Robot
 	//Honestly, I was wrong I am sorry. You actually want to just call
 	//the method and let the method do the checking
@@ -79,13 +78,13 @@ public class Shooter
 	public void manualTilt(MotorManager dr, JoystickController monitor)
 	{
 		
-		if(monitor.getTiltDownShoot())
+		if(monitor.getTiltDownShoot() > 0.05)
 		{
-			tiltValue = -.5;
+			tiltValue = -monitor.getTiltDownShoot();
 		}
-		else if(monitor.getTiltUpShoot())
+		else if(monitor.getTiltUpShoot() > 0.05)
 		{
-			tiltValue = .5;
+			tiltValue = monitor.getTiltUpShoot();
 		}
 		else
 		{

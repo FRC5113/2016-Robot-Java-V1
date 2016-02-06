@@ -67,7 +67,6 @@ public class MotorManager
 		rightMotor.set(rightPower);
 	}
 	
-	//Add in Limit Switches when created
 	public void tiltShoot(double tiltValue)
 	{
 		tiltMotorShoot.set(tiltValue);
