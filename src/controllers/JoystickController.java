@@ -115,6 +115,9 @@ public class JoystickController extends DriveController
 		{
 			dr.tankDrive(leftYAxis, rightYAxis);
 		}
+		
+		System.out.println("Encoder: " + dr.getEncoderValues());
+		System.out.println("StringPot: " + dr.getStringPot());
 	}
 	
 	public boolean getServo()

@@ -1,5 +1,6 @@
 package drive;
 
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
@@ -30,6 +31,8 @@ public class MotorManager
 	
 	private Encoder encoder;
 	
+	private AnalogInput stringPot;
+	
 	RobotDrive roboDrive;
 	
 	public void init()
@@ -54,6 +57,10 @@ public class MotorManager
 		
 		rightTake = new CANTalon(9001);//over 9000
 		rightTake.set(0);
+		
+		encoder = new Encoder(23123, 21312);
+		
+		stringPot = new AnalogInput(2134);
 		
 		roboDrive = new RobotDrive(leftMotor, rightMotor);
 	}
@@ -82,14 +89,18 @@ public class MotorManager
 		tiltMotorJoint.set(tiltValue);
 	}
 	
-	public int getEncoderValues(Encoder e)
+	public int getEncoderValues()
 	{
-		encoder = e;
 		//Not sure which one we should use.
 		//Returns raw value from the encoder.
 		//return encoder.getRaw();
 		//Returns the current count from the encoder.
 		return encoder.get();
+	}
+	
+	public double getStringPot()
+	{
+		return stringPot.getValue();
 	}
 	
 	public void spinShooterWheels(double leftWheel, double rightWheel)
