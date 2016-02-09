@@ -21,7 +21,7 @@ public class Shooter
 	
 	private double lowValue;
 	
-	private Servo servo1;
+	private Servo pusher;
 	
 	private boolean intake;
 	private boolean shootLow;
@@ -34,10 +34,10 @@ public class Shooter
 	//Done
 	public void init()
 	{
-		maxAngle = new DigitalInput(543212345);//fake
-		minAngle = new DigitalInput(432523);//fake
+		maxAngle = new DigitalInput(2);//fake
+		minAngle = new DigitalInput(3);//fake
 		
-		servo1 = new Servo(4234234);//fake
+		pusher = new Servo(0);//real
 		
 	}
 	

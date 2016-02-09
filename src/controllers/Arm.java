@@ -16,8 +16,8 @@ public class Arm
 	
 	public void init() 
 	{
-		minAngleBase = new DigitalInput(12345);
-		maxAngleBase = new DigitalInput(54321);
+		minAngleBase = new DigitalInput(8);//fake
+		maxAngleBase = new DigitalInput(9);//fake
 		
 	}
 

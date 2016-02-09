@@ -83,6 +83,9 @@ public class Robot extends IterativeRobot
         controller.update(motorManagers);
         shoot.update(motorManagers, controller);
         arm.update(motorManagers, controller);
+        
+		System.out.println("Encoder: " + motorManagers.getEncoderValues());
+		System.out.println("StringPot: " + motorManagers.getStringPot());
     }
     
     /**

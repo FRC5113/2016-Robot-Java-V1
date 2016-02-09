@@ -37,30 +37,30 @@ public class MotorManager
 	
 	public void init()
 	{
-		leftMotor = new CANTalon(420);//blaze it
+		leftMotor = new CANTalon(0);//blaze it
 		leftMotor.set(0);
 		
-		rightMotor = new CANTalon(1337);//leet
+		rightMotor = new CANTalon(1);//leet
 		rightMotor.set(0);
 		
-		tiltMotorShoot = new CANTalon(5113);//us
+		tiltMotorShoot = new CANTalon(2);//us
 		tiltMotorShoot.set(0);
 		
-		tiltMotorArm = new CANTalon(666);//Bob Ross
+		tiltMotorArm = new CANTalon(3);//Bob Ross
 		tiltMotorArm.set(0);
 		
-		tiltMotorJoint = new CANTalon(911);//not 9/11
+		tiltMotorJoint = new CANTalon(4);//not 9/11
 		tiltMotorJoint.set(0);
 		
-		leftTake = new CANTalon(8999);//not quite 9000
+		leftTake = new CANTalon(5);//not quite 9000
 		leftTake.set(0);
 		
-		rightTake = new CANTalon(9001);//over 9000
+		rightTake = new CANTalon(6);//over 9000
 		rightTake.set(0);
 		
-		encoder = new Encoder(23123, 21312);
+		encoder = new Encoder(0, 1);
 		
-		stringPot = new AnalogInput(2134);
+		stringPot = new AnalogInput(0);
 		
 		roboDrive = new RobotDrive(leftMotor, rightMotor);
 	}
