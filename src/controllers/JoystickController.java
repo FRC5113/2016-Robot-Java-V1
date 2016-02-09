@@ -3,10 +3,9 @@ package controllers;
 //This is for you Kyle :)
 
 import drive.MotorManager;
-
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import edu.wpi.first.wpilibj.buttons.Trigger.ButtonScheduler;
 
 public class JoystickController extends DriveController
 {
@@ -115,9 +114,6 @@ public class JoystickController extends DriveController
 		{
 			dr.tankDrive(leftYAxis, rightYAxis);
 		}
-		
-		System.out.println("Encoder: " + dr.getEncoderValues());
-		System.out.println("StringPot: " + dr.getStringPot());
 	}
 	
 	public boolean getServo()
@@ -169,7 +165,4 @@ public class JoystickController extends DriveController
 	{
 		return xboxController.getRawAxis(5);
 	}
-	
-	
-	
 }

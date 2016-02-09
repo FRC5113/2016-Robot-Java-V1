@@ -93,9 +93,14 @@ public class MotorManager
 	{
 		//Not sure which one we should use.
 		//Returns raw value from the encoder.
-		//return encoder.getRaw();
+		return encoder.getRaw();
 		//Returns the current count from the encoder.
-		return encoder.get();
+		//return encoder.get();
+	}
+	
+	public void resetEncoder()
+	{
+		encoder.reset();
 	}
 	
 	public double getStringPot()

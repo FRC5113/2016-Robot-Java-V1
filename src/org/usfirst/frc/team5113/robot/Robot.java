@@ -62,7 +62,7 @@ public class Robot extends IterativeRobot
 	 */
     public void autonomousInit() 
     {
-
+    	motorManagers.resetEncoder();
     }
 
     /**
@@ -73,6 +73,11 @@ public class Robot extends IterativeRobot
     	
     }
 
+    public void teleopInit()
+    {
+    	
+    }
+    
     /**
      * This function is called periodically during operator control
      */
@@ -86,6 +91,8 @@ public class Robot extends IterativeRobot
         
 		System.out.println("Encoder: " + motorManagers.getEncoderValues());
 		System.out.println("StringPot: " + motorManagers.getStringPot());
+		System.out.println("Ultrasonic Range Finder (Inches): " + shoot.getSonicRangeInches());
+		System.out.println("Servo: " + shoot.pusher.getAngle());
     }
     
     /**

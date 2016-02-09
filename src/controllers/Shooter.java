@@ -1,11 +1,10 @@
 package controllers;
 
 import drive.MotorManager;
-import edu.wpi.first.wpilibj.CANTalon;
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Servo;
-import controllers.JoystickController;
 
 public class Shooter
 {
@@ -19,9 +18,11 @@ public class Shooter
 	private DigitalInput maxAngle;
 	private DigitalInput minAngle;
 	
+	private AnalogInput sonicRange;//sonicRAGE
+	
 	private double lowValue;
 	
-	private Servo pusher;
+	public Servo pusher;//rebel
 	
 	private boolean intake;
 	private boolean shootLow;
@@ -39,8 +40,8 @@ public class Shooter
 		
 		pusher = new Servo(0);//real
 		
+		sonicRange = new AnalogInput(1);//sonicRage
 	}
-	
 	
 	//Make sure to call this in Robot
 	//Honestly, I was wrong I am sorry. You actually want to just call
@@ -50,6 +51,11 @@ public class Shooter
 	{
 		manualTilt(dr, monitor);
 		manualWheels(dr, monitor);
+		
+		if(monitor.getServo())
+		{
+			pusher.setAngle(pusher.getAngle() + 2);
+		}
 	}
 	
 	//Get value of buttons for the intake and the shoot low
@@ -92,5 +98,13 @@ public class Shooter
 		}
 		
 		dr.tiltShoot(tiltValue);
+	}
+	
+	public double getSonicRangeInches()
+	{
+		double voltage = sonicRange.getVoltage();
+		double range = ((voltage * 1024) / 5) / 2.54;
+		
+		return range;
 	}
 }
