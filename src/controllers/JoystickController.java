@@ -47,15 +47,20 @@ public class JoystickController extends DriveController
 		
 		reverseControl = new JoystickButton(rightStick, 4);
 		
-		servo = new JoystickButton(xboxController, 1);
-		intake = new JoystickButton(xboxController, 4);
-		shootLow = new JoystickButton(xboxController, 5);
-		activateAutoShoot = new JoystickButton(xboxController, 10);
-		hookLift = new JoystickButton(xboxController, 7);
-		hookDrop = new JoystickButton (xboxController, 11);
-		emergencyStop = new JoystickButton(xboxController, 6);
-		emergencyStop2 = new JoystickButton(xboxController, 7);
 		
+		servo = new JoystickButton(xboxController, 4);
+		intake = new JoystickButton(xboxController, 3);
+		shootLow = new JoystickButton(xboxController, 2);
+		activateAutoShoot = new JoystickButton(xboxController, 1);
+		hookLift = new JoystickButton(xboxController, 5);
+		hookDrop = new JoystickButton (xboxController, 6);
+		emergencyStop = new JoystickButton(xboxController, 7);
+		emergencyStop2 = new JoystickButton(xboxController, 8);
+		
+		//tiltUpJoint = new JoystickButton(xboxController, 8);
+		//tiltDownJoint = new JoystickButton(xboxController, 9);
+		
+		//ALL WRONG \/\/\/\/\/\/\/\/\/\/\/\/\/ WHYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY
 		//tiltUpJoint = new JoystickButton(xboxController, 8);
 		//tiltDownJoint = new JoystickButton(xboxController, 9);
 		/*1 = y
