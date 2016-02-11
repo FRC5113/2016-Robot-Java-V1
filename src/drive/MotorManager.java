@@ -29,10 +29,6 @@ public class MotorManager
 	//^ditto
 	private CANTalon tiltMotorJoint;
 	
-	private Encoder encoder;
-	
-	private AnalogInput stringPot;
-	
 	RobotDrive roboDrive;
 	
 	public void init()
@@ -57,10 +53,6 @@ public class MotorManager
 		
 		rightTake = new CANTalon(6);//over 9000
 		rightTake.set(0);
-		
-		encoder = new Encoder(0, 1);
-		
-		stringPot = new AnalogInput(0);
 		
 		roboDrive = new RobotDrive(leftMotor, rightMotor);
 	}
@@ -87,25 +79,6 @@ public class MotorManager
 	public void tiltJoint(double tiltValue)
 	{
 		tiltMotorJoint.set(tiltValue);
-	}
-	
-	public int getEncoderValues()
-	{
-		//Not sure which one we should use.
-		//Returns raw value from the encoder.
-		return encoder.getRaw();
-		//Returns the current count from the encoder.
-		//return encoder.get();
-	}
-	
-	public void resetEncoder()
-	{
-		encoder.reset();
-	}
-	
-	public double getStringPot()
-	{
-		return stringPot.getValue();
 	}
 	
 	public void spinShooterWheels(double leftWheel, double rightWheel)

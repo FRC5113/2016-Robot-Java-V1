@@ -1,6 +1,7 @@
 package controllers;
 
 import drive.MotorManager;
+import drive.SensorManager;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
@@ -17,8 +18,6 @@ public class Shooter
 	//it is -Reed
 	private DigitalInput maxAngle;
 	private DigitalInput minAngle;
-	
-	private AnalogInput sonicRange;//sonicRAGE
 	
 	private double lowValue;
 	
@@ -39,15 +38,10 @@ public class Shooter
 		minAngle = new DigitalInput(3);//fake
 		
 		pusher = new Servo(0);//real
-		
-		sonicRange = new AnalogInput(1);//sonicRage
 	}
 	
-	//Make sure to call this in Robot
-	//Honestly, I was wrong I am sorry. You actually want to just call
-	//the method and let the method do the checking
-	//Do manual wheels like manual tilt
-	public void update(MotorManager dr, JoystickController monitor)
+	//It requires dr for motor access, monitor for stick access and sensors for sensor access (Especially for auto-shoot)
+	public void update(MotorManager dr, JoystickController monitor, SensorManager sensors)
 	{
 		manualTilt(dr, monitor);
 		manualWheels(dr, monitor);
@@ -100,11 +94,4 @@ public class Shooter
 		dr.tiltShoot(tiltValue);
 	}
 	
-	public double getSonicRangeInches()
-	{
-		double voltage = sonicRange.getVoltage();
-		double range = ((voltage * 1024) / 5) / 2.54;
-		
-		return range;
-	}
 }

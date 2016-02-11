@@ -5,6 +5,7 @@ import controllers.Arm;
 import controllers.DriveController;
 import controllers.JoystickController;
 import drive.MotorManager;
+import drive.SensorManager;
 import controllers.Shooter;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Timer;
@@ -31,9 +32,11 @@ public class Robot extends IterativeRobot
     
     
 	private MotorManager motorManagers;// this gives us access to the Drive class
+	private SensorManager sensors;
 	private JoystickController controller;
 	private Shooter shoot;
 	private Arm arm;
+	
 	
     /**
      * This function is run when the robot is first started up and should be
@@ -49,6 +52,8 @@ public class Robot extends IterativeRobot
         shoot.init();
         arm = new Arm();
         arm.init();
+        sensors = new SensorManager();
+        sensors.init();
     }
     
 	/**
@@ -62,7 +67,7 @@ public class Robot extends IterativeRobot
 	 */
     public void autonomousInit() 
     {
-    	motorManagers.resetEncoder();
+    	sensors.resetEncoder();
     }
 
     /**
@@ -83,15 +88,15 @@ public class Robot extends IterativeRobot
      */
     public void teleopPeriodic()
     {
-    	//This is a test commit to make sure everything works
-    	//This is another test commit to make sure the mainTop is now cooperating
+    	//The order of the update methods is important. Besides making a nice slope of periods, the motors and sensors have to update first
         controller.update(motorManagers);
-        shoot.update(motorManagers, controller);
+        sensors.update();
+        shoot.update(motorManagers, controller, sensors);
         arm.update(motorManagers, controller);
         
-		System.out.println("Encoder: " + motorManagers.getEncoderValues());
-		System.out.println("StringPot: " + motorManagers.getStringPot());
-		System.out.println("Ultrasonic Range Finder (Inches): " + shoot.getSonicRangeInches());
+		System.out.println("Encoder: " + sensors.getEncoderValues());
+		System.out.println("StringPot: " + sensors.getStringPot());
+		System.out.println("Ultrasonic Range Finder (Inches): " + sensors.getSonicRangeInches());
 		System.out.println("Servo: " + shoot.pusher.getAngle());
     }
     
