@@ -52,6 +52,7 @@ public class AimParameters {
 				+ ", distanceM=" + distanceM
 				+ "]" ;
 	}
+	
 
 	/** This method is declared private so that users do not accidently set the distance in meters to feet.
 	 * It is called internally by the constructor. 
