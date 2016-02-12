@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj.ADXL345_I2C;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.Encoder;
-//import edu.wpi.first.wpilibj.Gyro;
+import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.I2C.Port;
 import edu.wpi.first.wpilibj.interfaces.Accelerometer.Range;
 
@@ -13,7 +13,7 @@ public class SensorManager
 	//adding the gyroscope and accelerometer into single class
 	
 	BuiltInAccelerometer accel;
-	//Gyro gyro;
+	AnalogGyro gyro;
 	
 	private Encoder encoder;
 	
@@ -29,9 +29,9 @@ public class SensorManager
 		System.out.println("Test for toString(NO toString) of Accelerometer: " + accel);
 		
 		//gyroscope
-		//gyro = new Gyro(1);
-		//gyro.initGyro();
-		//System.out.println("Gyro is now inited\t" + gyro.getAngle());
+		gyro = new AnalogGyro(1);
+		gyro.initGyro();
+		System.out.println("Gyro is now initiated\t" + gyro.getAngle());
 		
 		
 		encoder = new Encoder(0, 1);
@@ -45,7 +45,7 @@ public class SensorManager
 	
 	public void update()
 	{
-		//gyro.updateTable();
+		gyro.updateTable();
 		accel.updateTable();
 	}
 	
