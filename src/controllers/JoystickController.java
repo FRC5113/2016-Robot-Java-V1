@@ -4,7 +4,6 @@ package controllers;
 
 import drive.MotorManager;
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 public class JoystickController extends DriveController
@@ -105,12 +104,11 @@ public class JoystickController extends DriveController
 
 		boolean reverse = reverseControl.get();
 		
-		if (reverse == true)
+		if (reverse)
 		{
 			leftYAxis = -leftYAxis;
 			rightYAxis = -rightYAxis;
 		}
-		
 		if(emergencyStop.get() && emergencyStop2.get())
 		{
 			dr.tankDrive(0, 0);
