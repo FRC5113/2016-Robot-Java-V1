@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.I2C.Port;
 import edu.wpi.first.wpilibj.interfaces.Accelerometer.Range;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class SensorManager
 {
@@ -45,6 +46,7 @@ public class SensorManager
 		
 		sonicRange = new AnalogInput(2);//sonicRage
 
+		SmartDashboard.putString("AyyLmao", "Ayy Lmao");
 	}
 	
 	public void update()
@@ -52,6 +54,8 @@ public class SensorManager
 		gyroXY.updateTable();
 		gyroZ.updateTable();
 		accel.updateTable();
+		
+		SmartDashboard.getString("AyyLmao", "Ayy Lmao");
 	}
 	
 	public int getEncoderValues()
