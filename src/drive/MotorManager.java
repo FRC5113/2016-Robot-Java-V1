@@ -74,6 +74,7 @@ public class MotorManager
 	public void tiltArm(double tiltValue)
 	{
 		tiltMotorArm.set(tiltValue);
+		
 	}
 	
 	public void tiltJoint(double tiltValue)
