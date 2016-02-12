@@ -30,7 +30,10 @@ public class RoughTerrain extends DefenseFrame
 			break;
 			
 		case 3:
+			controller.stop();
 			System.out.println("Done!");
+			
+			break;
 				
 		}
 	}
