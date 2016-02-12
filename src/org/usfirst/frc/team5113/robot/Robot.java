@@ -98,6 +98,9 @@ public class Robot extends IterativeRobot
 		System.out.println("StringPot: " + sensors.getStringPot());
 		System.out.println("Ultrasonic Range Finder (Inches): " + sensors.getSonicRangeInches());
 		System.out.println("Servo: " + shoot.pusher.getAngle());
+		
+		System.out.println("Gyro XY: " + sensors.getGyroXYAngle());
+		System.out.println("Gyro Z: " + sensors.getGyroZAngle());
     }
     
     /**
