@@ -29,6 +29,7 @@ public class Shooter
 	private boolean tiltUp;
 	
 	private double tiltValue;
+	public int servoDir;//also a rebel
 	
 	//instantiate objects with obviously fake ports
 	//Done
@@ -38,6 +39,7 @@ public class Shooter
 		minAngle = new DigitalInput(3);//fake
 		
 		pusher = new Servo(0);//real
+		pusher.setAngle(0);
 	}
 	
 	//It requires dr for motor access, monitor for stick access and sensors for sensor access (Especially for auto-shoot)
@@ -46,10 +48,39 @@ public class Shooter
 		manualTilt(dr, monitor);
 		manualWheels(dr, monitor);
 		
-		if(monitor.getServo())
+		/*s e r v o 
+		  e 
+		  r
+		  v
+		  o */
+		
+		/*if(monitor.getServo())
 		{
-			pusher.setAngle(pusher.getAngle() + 2);
+			pusher.setAngle(pusher.getAngle() + 90);
 		}
+		*/
+/*		else if(monitor.getServoDown())
+		{
+			pusher.setAngle(pusher.getAngle() - 45);
+		}
+*/		
+		
+		switch(servoDir)
+		{
+			case 1:
+				if(pusher.getAngle() == 180.0)
+				{
+					pusher.setAngle(180);
+				}
+				break;
+			
+			case 2:
+				if(monitor.getServo())
+				{
+					pusher.setAngle(180);
+				}
+		}
+		
 	}
 	
 	//Get value of buttons for the intake and the shoot low
