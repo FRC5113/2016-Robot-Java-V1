@@ -19,8 +19,6 @@ public class Shooter
 	private DigitalInput maxAngle;
 	private DigitalInput minAngle;
 	
-	private double lowValue;
-	
 	public Servo pusher;//rebel
 	
 	private boolean intake;
@@ -28,8 +26,10 @@ public class Shooter
 	private boolean tiltDown;
 	private boolean tiltUp;
 	
+	private double lowValue;
 	private double tiltValue;
-	public int servoDir;//also a rebel
+	private double timer;
+	private int servoDir;
 	
 	//instantiate objects with obviously fake ports
 	//Done
@@ -40,6 +40,8 @@ public class Shooter
 		
 		pusher = new Servo(0);//real
 		pusher.setAngle(0);
+		
+		servoDir = 1;
 	}
 	
 	//It requires dr for motor access, monitor for stick access and sensors for sensor access (Especially for auto-shoot)
@@ -52,33 +54,30 @@ public class Shooter
 		  e 
 		  r
 		  v
-		  o */
-		
-		/*if(monitor.getServo())
-		{
-			pusher.setAngle(pusher.getAngle() + 90);
-		}
-		*/
-/*		else if(monitor.getServoDown())
-		{
-			pusher.setAngle(pusher.getAngle() - 45);
-		}
-*/		
+		  o		  */
 		
 		switch(servoDir)
 		{
 			case 1:
-				if(pusher.getAngle() == 180.0)
-				{
-					pusher.setAngle(180);
-				}
-				break;
-			
-			case 2:
 				if(monitor.getServo())
 				{
-					pusher.setAngle(180);
+					servoDir = 2;
 				}
+				break;
+				
+			case 2:
+				pusher.setAngle(180);
+				servoDir = 3;
+				timer = System.currentTimeMillis();
+				break;
+			
+			case 3:
+				if(pusher.getAngle() > 175.0 && System.currentTimeMillis() - timer > 500)
+				{
+					pusher.setAngle(0);
+				}
+				servoDir = 1;
+				break;
 		}
 		
 	}
