@@ -24,9 +24,6 @@ public class JoystickController extends DriveController
 	private JoystickButton hookDrop;
 	private JoystickButton emergencyStop;
 	private JoystickButton emergencyStop2;
-	
-	
-	
 	private JoystickButton tiltArm;
 	//private JoystickButton tiltDownArm;
 	private JoystickButton tiltJoint;
