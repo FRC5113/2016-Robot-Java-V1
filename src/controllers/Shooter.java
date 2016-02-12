@@ -72,11 +72,12 @@ public class Shooter
 				break;
 			
 			case 3:
-				if(pusher.getAngle() > 175.0 && System.currentTimeMillis() - timer > 500)
+				if(pusher.getAngle() > 175.0 && System.currentTimeMillis() - timer > 1000)
 				{
 					pusher.setAngle(0);
+					servoDir = 1;
 				}
-				servoDir = 1;
+				
 				break;
 		}
 		
