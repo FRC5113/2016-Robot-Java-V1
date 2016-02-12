@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj.ADXL345_I2C;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.Encoder;
-//import edu.wpi.first.wpilibj.AnalogGyro;
+import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.I2C.Port;
 import edu.wpi.first.wpilibj.interfaces.Accelerometer.Range;
 
@@ -13,7 +13,9 @@ public class SensorManager
 	//adding the gyroscope and accelerometer into single class
 	
 	BuiltInAccelerometer accel;
-	//AnalogGyro gyro;
+	
+	AnalogGyro gyroXY;
+	AnalogGyro gyroZ;
 	
 	private Encoder encoder;
 	
@@ -29,23 +31,26 @@ public class SensorManager
 		System.out.println("Test for toString(NO toString) of Accelerometer: " + accel);
 		
 		//gyroscope
-		//gyro = new AnalogGyro(1);
-		//gyro.initGyro();
-		//System.out.println("Gyro is now initiated\t" + gyro.getAngle());
+		gyroXY = new AnalogGyro(0);
+		gyroXY.initGyro();
+		System.out.println("Gyro XY is now initiated\t" + gyroXY.getAngle());
 		
+		gyroZ = new AnalogGyro(1);
+		gyroZ.initGyro();
+		System.out.println("Gyro Z is now initiated\t" + gyroZ.getAngle());
 		
 		encoder = new Encoder(0, 1);
 		
-		stringPot = new AnalogInput(0);
+		stringPot = new AnalogInput(3);
 		
-		
-		sonicRange = new AnalogInput(1);//sonicRage
+		sonicRange = new AnalogInput(2);//sonicRage
 
 	}
 	
 	public void update()
 	{
-		//gyro.updateTable();
+		gyroXY.updateTable();
+		gyroZ.updateTable();
 		accel.updateTable();
 	}
 	
@@ -75,6 +80,16 @@ public class SensorManager
 		
 		return range;
 	}
-		
 	
+	public double getGyroXYAngle()
+	 
+	{
+		return gyroXY.getAngle();
+	}
+	
+	 public double getGyroZAngle()
+	 {
+		 return gyroZ.getAngle();
+	 }
+		
 }
