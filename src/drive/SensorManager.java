@@ -23,6 +23,8 @@ public class SensorManager
 	
 	private AnalogInput sonicRange;//sonicRAGE
 	
+	private int encoderAngle;
+	
 	public void init()
 	{
 		//accelerometer
@@ -63,9 +65,31 @@ public class SensorManager
 		//return encoder.get();
 	}
 	
+	public double getEncoderDistance()
+	{
+		return encoder.getDistance();
+	}
+	
+	public int getEncoderCount()
+	{
+		return encoder.get();
+	}
+	
+	public double getEncoderRate()
+	{
+		return encoder.getRate();
+	}
+	
 	public void resetEncoder()
 	{
 		encoder.reset();
+	}
+	
+	public int getEncoderAngle()
+	{
+		encoder.setDistancePerPulse(.5);
+		
+		return encoderAngle;
 	}
 	
 	public double getStringPot()
