@@ -94,13 +94,13 @@ public class Robot extends IterativeRobot
         shoot.update(motorManagers, controller, sensors);
         arm.update(motorManagers, controller);
         
-		System.out.println("Encoder: " + sensors.getEncoderValues());
-		System.out.println("StringPot: " + sensors.getStringPot());
+		//System.out.println("Encoder: " + sensors.getEncoderValues());
+		//System.out.println("StringPot: " + sensors.getStringPot());
 		System.out.println("Ultrasonic Range Finder (Inches): " + sensors.getSonicRangeInches());
-		System.out.println("Servo: " + shoot.pusher.getAngle());
+		//System.out.println("Servo: " + shoot.pusher.getAngle());
 		
-		System.out.println("Gyro XY: " + sensors.getGyroXYAngle());
-		System.out.println("Gyro Z: " + sensors.getGyroZAngle());
+		//System.out.println("Gyro XY: " + sensors.getGyroXYAngle());
+		//System.out.println("Gyro Z: " + sensors.getGyroZAngle());
     }
     
     /**

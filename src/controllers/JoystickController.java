@@ -4,6 +4,7 @@ package controllers;
 
 import drive.MotorManager;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Joystick.RumbleType;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 public class JoystickController extends DriveController
