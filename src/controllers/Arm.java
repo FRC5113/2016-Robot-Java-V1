@@ -29,11 +29,14 @@ public class Arm
 		
 	}
 	
+	//moves both the base and the joint of the arm at the same rate?
+	//when the base is used the arm must be used as well
 	public void tiltBase(MotorManager dr, JoystickController monitor)
 	{
 		tiltValueBase = monitor.getTiltArm();
-		
+	
 		dr.tiltArm(tiltValueBase);
+		dr.tiltJoint(tiltValueBase);
 	}
 	
 	public void tiltJoint(MotorManager dr, JoystickController monitor)

@@ -56,6 +56,11 @@ public class AutonController extends DriveController
 		leftMotor = speed;
 		rightMotor = speed;
 	}
-
+	
+	public void stop()
+	{
+		leftMotor = 0;
+		rightMotor = 0;
+	}
 	
 }
