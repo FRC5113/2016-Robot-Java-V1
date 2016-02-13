@@ -12,8 +12,6 @@ import auton.RoughTerrain;
 public class AutonController extends DriveController
 {	
 	private int caseSelector = 1;
-	
-	
 	private double leftMotor, rightMotor;
 	
 	
@@ -39,7 +37,6 @@ public class AutonController extends DriveController
 	{
 		
 	}
-	
 	public void update(MotorManager dr, SensorManager sensors)
 	{
 		if(caseSelector == 1)

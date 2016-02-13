@@ -6,7 +6,6 @@ import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Servo;
-import edu.wpi.first.wpilibj.Joystick.RumbleType;
 
 public class Shooter
 {
@@ -60,35 +59,20 @@ public class Shooter
 		switch(servoDir)
 		{
 			case 1:
-				
 				if(monitor.getServo())
+				{
 					servoDir = 2;
-				
+				}
 				break;
 				
 			case 2:
 				pusher.setAngle(180);
 				servoDir = 3;
 				timer = System.currentTimeMillis();
-				
-				monitor.xboxController.setRumble(RumbleType.kLeftRumble, 0.3f);
-				monitor.xboxController.setRumble(RumbleType.kRightRumble, 0.3f);
-				
-				
 				break;
-				
-			case 3:
-				
-				if(System.currentTimeMillis() - timer > 650)
-				{
-					monitor.xboxController.setRumble(RumbleType.kLeftRumble, 0);
-					monitor.xboxController.setRumble(RumbleType.kRightRumble, 0);
-					
-					servoDir = 4;
-				}
 			
-			case 4:
-				if(pusher.getAngle() > 175.0 && System.currentTimeMillis() - timer > 750)
+			case 3:
+				if(pusher.getAngle() > 175.0 && System.currentTimeMillis() - timer > 1000)
 				{
 					pusher.setAngle(0);
 					servoDir = 1;
