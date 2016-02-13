@@ -3,8 +3,10 @@ package controllers;
 //This is for you Kyle :)
 
 import drive.MotorManager;
+import drive.SensorManager;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class JoystickController extends DriveController
 {

@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.I2C.Port;
 import edu.wpi.first.wpilibj.interfaces.Accelerometer.Range;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.vision.USBCamera;
 
 public class SensorManager
 {
@@ -24,12 +25,17 @@ public class SensorManager
 	
 	private AnalogInput sonicRange;//sonicRAGE
 	
+	private USBCamera lmao;
+	
 	public void init()
 	{
 		//accelerometer
 		accel = new BuiltInAccelerometer();
 		System.out.println("Test for toString of Accelerometer: " + accel.toString());
 		System.out.println("Test for toString(NO toString) of Accelerometer: " + accel);
+		System.out.println("Accelerometer X is now initiated\t" + accel.getX());
+		System.out.println("Accelerometer Y is now initiated\t" + accel.getY());
+		System.out.println("Accelerometer Z is now initiated\t" + accel.getZ());
 		
 		//gyroscope
 		gyroXY = new AnalogGyro(0);
@@ -45,8 +51,10 @@ public class SensorManager
 		stringPot = new AnalogInput(3);
 		
 		sonicRange = new AnalogInput(2);//sonicRage
-
-		SmartDashboard.putString("AyyLmao", "Ayy Lmao");
+		
+		lmao = new USBCamera();
+		
+		lmao.startCapture();
 	}
 	
 	public void update()
@@ -54,8 +62,7 @@ public class SensorManager
 		gyroXY.updateTable();
 		gyroZ.updateTable();
 		accel.updateTable();
-		
-		SmartDashboard.getString("AyyLmao", "Ayy Lmao");
+		lmao.updateSettings();
 	}
 	
 	public int getEncoderValues()
@@ -91,9 +98,47 @@ public class SensorManager
 		return gyroXY.getAngle();
 	}
 	
-	 public double getGyroZAngle()
-	 {
-		 return gyroZ.getAngle();
-	 }
+	public double getGyroZAngle()
+	{
+		return gyroZ.getAngle();
+	}
 		
+	public double getAccelX()
+	{
+		return accel.getX();
+	}
+	
+	public double getAccelY()
+	{
+		return accel.getY();
+	}
+	
+	public double getAccelZ()
+	{
+		return accel.getZ();
+	}
+	
+	public String getLmao()
+	{
+		while(true)
+		{
+			for(int i = 0; i <= 6; i++)
+			{
+				if(i == 0)
+					return "A";
+				if(i == 1)
+					return "Y";
+				if(i == 2)
+					return "Y";
+				if(i == 3)
+					return "L";
+				if(i == 4)
+					return "M";
+				if(i == 5)
+					return "A";
+				if(i == 6)
+					return "O";
+			}
+		}
+	}
 }

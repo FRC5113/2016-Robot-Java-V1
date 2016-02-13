@@ -101,6 +101,18 @@ public class Robot extends IterativeRobot
 		
 		System.out.println("Gyro XY: " + sensors.getGyroXYAngle());
 		System.out.println("Gyro Z: " + sensors.getGyroZAngle());
+		System.out.println("Accelerometer X" + sensors.getAccelX());
+		System.out.println("Accelerometer Y" + sensors.getAccelY());
+		System.out.println("Accelerometer Z" + sensors.getAccelZ());
+		
+		SmartDashboard.putString("AyyLmao", sensors.getLmao());
+
+		SmartDashboard.putNumber("RangeFinder", sensors.getSonicRangeInches());
+		SmartDashboard.putNumber("Gyro XY", sensors.getGyroXYAngle());
+		SmartDashboard.putNumber("Gyro Z", sensors.getGyroZAngle());
+		SmartDashboard.putNumber("Accelerometer X", sensors.getAccelX());
+		SmartDashboard.putNumber("Accelerometer Y", sensors.getAccelY());
+		SmartDashboard.putNumber("Accelerometer Z", sensors.getAccelZ());
     }
     
     /**
