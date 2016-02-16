@@ -4,28 +4,28 @@ import drive.SensorManager;
 
 public class RoughTerrain extends DefenseFrame
 {
-	private int caseSelector = 1;
+	private int servoDir = 1;
 	private double speed = 0.5;
 	private double time;
 	
 	public void update(SensorManager sensors)
 	{
-		switch(caseSelector)
+		switch(servoDir)
 		{
 		case 1:
-			controller.forward(speed);
+			controller.move(speed);
 			time = System.currentTimeMillis();
 			
 			if(sensors.getGyroZAngle() > 5)
-				caseSelector = 2;
+				servoDir = 2;
 			
 			break;
 		
 		case 2:
-			controller.forward(speed);
+			controller.move(speed);
 			
 			if(sensors.getGyroZAngle() <= 5 && System.currentTimeMillis() - time > 5000)
-				caseSelector = 3;
+				servoDir = 3;
 			
 			break;
 			

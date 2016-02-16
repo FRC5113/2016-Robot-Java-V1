@@ -13,6 +13,8 @@ public class AutonController extends DriveController
 {	
 	private int caseSelector = 1;
 	private double leftMotor, rightMotor;
+	private double armMotor, jointMotor;
+	private double shooterAngle;
 	
 	
 	Moat moat;
@@ -49,9 +51,13 @@ public class AutonController extends DriveController
 			ramparts.update(sensors);
 		else if(caseSelector == 5)
 			roughTerrain.update(sensors);
+		
+		dr.tankDrive(leftMotor, rightMotor);
+		dr.tiltArm(armMotor);
+		dr.tiltJoint(jointMotor);
 	}
 	
-	public void forward(double speed)
+	public void move(double speed)
 	{
 		leftMotor = speed;
 		rightMotor = speed;
@@ -61,6 +67,21 @@ public class AutonController extends DriveController
 	{
 		leftMotor = 0;
 		rightMotor = 0;
+	}
+	
+	public void setArm(double angle)
+	{
+		armMotor = angle;
+	}
+	
+	public void setJoint(double angle)
+	{
+		jointMotor = angle;
+	}
+	
+	public void setShooter(double angle)
+	{
+		shooterAngle = angle;
 	}
 	
 }

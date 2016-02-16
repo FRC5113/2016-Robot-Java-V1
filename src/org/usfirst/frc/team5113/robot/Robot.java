@@ -1,17 +1,21 @@
 
 package org.usfirst.frc.team5113.robot;
 
+import com.ni.vision.NIVision;
+import com.ni.vision.NIVision.DrawMode;
+import com.ni.vision.NIVision.Image;
+import com.ni.vision.NIVision.ShapeMode;
+
 import controllers.Arm;
-import controllers.DriveController;
 import controllers.JoystickController;
+import controllers.Shooter;
 import drive.MotorManager;
 import drive.SensorManager;
-import controllers.Shooter;
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Timer;
 //Auto-added, not sure if we actually need them... but whatever
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -30,6 +34,8 @@ public class Robot extends IterativeRobot
     String autoSelected;
     SendableChooser chooser;
     
+    Image frame;
+    int session;
     
 	private MotorManager motorManagers;// this gives us access to the Drive class
 	private SensorManager sensors;
@@ -47,13 +53,22 @@ public class Robot extends IterativeRobot
         controller = new JoystickController();
         controller.init();
         motorManagers = new MotorManager();
-        motorManagers.init();
+        motorManagers.init();//idk where i should put this but here: TEHURN.COM
         shoot = new Shooter();
         shoot.init();
         arm = new Arm();
         arm.init();
         sensors = new SensorManager();
         sensors.init();
+        
+        frame = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_RGB, 0);
+        session = NIVision.IMAQdxOpenCamera("cam0", NIVision.IMAQdxCameraControlMode.CameraControlModeController);
+        NIVision.IMAQdxConfigureGrab(session); //I totally wrote this super EZM8 line of code by myself.
+        
+        
+        //CameraServer server = CameraServer.getInstance();
+        //server.setQuality(50);
+        //server.startAutomaticCapture("cam0");
     }
     
 	/**
@@ -101,11 +116,21 @@ public class Robot extends IterativeRobot
 		System.out.println("Degrees per Second: " + sensors.getEncoderAngularSpeed());
 		
 		//System.out.println("StringPot: " + sensors.getStringPot());
-		//System.out.println("Ultrasonic Range Finder (Inches): " + sensors.getSonicRangeInches());
+		System.out.println("Ultrasonic Range Finder (Inches): " + sensors.getSonicRangeInches());
 		//System.out.println("Servo: " + shoot.pusher.getAngle());
 		
 		//System.out.println("Gyro XY: " + sensors.getGyroXYAngle());
 		//System.out.println("Gyro Z: " + sensors.getGyroZAngle());
+		
+		NIVision.IMAQdxStartAcquisition(session);
+		NIVision.Rect rect = new NIVision.Rect(10,10,100,100);
+		
+		NIVision.IMAQdxGrab(session, frame, 1);
+		NIVision.imaqDrawShapeOnImage(frame, frame, rect, DrawMode.DRAW_VALUE,  ShapeMode.SHAPE_OVAL, 0.0f);
+		
+		CameraServer.getInstance().setImage(frame);
+		
+		Timer.delay(0.005);
     }
     
     /**
