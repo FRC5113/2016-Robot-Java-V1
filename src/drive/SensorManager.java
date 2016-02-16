@@ -99,11 +99,12 @@ public class SensorManager
 		encoder.reset();
 	}
 	
-	public int getEncoderAngle()
+	public double getEncoderAngle()
 	{
-		encoder.setDistancePerPulse(.5);
+		double raw = encoder.get();
+		raw = raw / 250;
 		
-		return encoderAngle;
+		return raw;
 	}
 	
 	public double getStringPot()
