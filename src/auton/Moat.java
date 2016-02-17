@@ -4,34 +4,35 @@ import drive.SensorManager;
 
 public class Moat extends DefenseFrame
 {
-	private int servoDir;
+	private int caseSelector;
 	private boolean selectorCheck = false;
-	private final double speed1 = 0.5, speed2 = 1;
+	private double speed1 = 0.5;
+	private double speed2 = 1;
 	private double time;
 	
 	public void update(SensorManager sensors)
 	{
 		if(sensors.getGyroZAngle() <= 5 && !selectorCheck)
-			servoDir = 1;
+			caseSelector = 1;
 		
-		switch(servoDir)
+		switch(caseSelector)
 		{
 		case 1:
-			controller.move(speed1);
+			controller.forward(speed1);
 			
 			if(sensors.getGyroZAngle() > 5)
 			{
-				servoDir = 2;
+				caseSelector = 2;
 				time = System.currentTimeMillis();
 			}
 			
 			break;
 			
 		case 2:
-			controller.move(speed2);
+			controller.forward(speed2);
 			
 			if(sensors.getGyroZAngle() <= 5 && System.currentTimeMillis() - time >= 5000)
-				servoDir = 3;
+				caseSelector = 3;
 			
 			break;
 			

@@ -24,7 +24,6 @@ public class JoystickController extends DriveController
 	private JoystickButton hookDrop;
 	private JoystickButton emergencyStop;
 	private JoystickButton emergencyStop2;
-	private JoystickButton notRumble;//RUMBLE WILL LIVE ON
 	private JoystickButton tiltArm;
 	//private JoystickButton tiltDownArm;
 	private JoystickButton tiltJoint;
@@ -53,7 +52,6 @@ public class JoystickController extends DriveController
 		hookDrop = new JoystickButton (xboxController, 6);
 		emergencyStop = new JoystickButton(xboxController, 7);
 		emergencyStop2 = new JoystickButton(xboxController, 8);
-		notRumble = new JoystickButton(xboxController, 10);
 		
 		//tiltUpJoint = new JoystickButton(xboxController, 8);
 		//tiltDownJoint = new JoystickButton(xboxController, 9);
@@ -156,11 +154,6 @@ public class JoystickController extends DriveController
 	public boolean getHookDrop()
 	{
 		return hookDrop.get();
-	}
-	
-	public boolean totallyNotRumble()
-	{
-		return notRumble.get();
 	}
 	
 	public double getTiltArm()
