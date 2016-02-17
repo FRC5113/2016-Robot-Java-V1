@@ -7,6 +7,7 @@ import controllers.JoystickController;
 import drive.MotorManager;
 import drive.SensorManager;
 import controllers.Shooter;
+import controllers.ShooterSubSystem;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Timer;
 //Auto-added, not sure if we actually need them... but whatever
@@ -36,6 +37,8 @@ public class Robot extends IterativeRobot
 	private JoystickController controller;
 	private Shooter shoot;
 	private Arm arm;
+	
+	ShooterSubSystem shooter = new ShooterSubSystem();
 	
 	
     /**
@@ -105,6 +108,10 @@ public class Robot extends IterativeRobot
 		
 		//System.out.println("Gyro XY: " + sensors.getGyroXYAngle());
 		//System.out.println("Gyro Z: " + sensors.getGyroZAngle());
+		
+		SmartDashboard.putNumber("Gyro XY", sensors.getGyroXYAngle());
+		SmartDashboard.putNumber("Gyro Z", sensors.getGyroZAngle());
+		SmartDashboard.putNumber("Distance", sensors.getSonicRangeInches());
     }
     
     /**
