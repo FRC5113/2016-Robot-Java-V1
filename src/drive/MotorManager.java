@@ -56,7 +56,10 @@ public class MotorManager
 		rightTake.set(0);
 		
 		roboDrive = new RobotDrive(leftMotor, rightMotor);
-	
+		
+		PIDPosition = 0;
+		PIDTime = System.currentTimeMillis();
+		PIDError = 0;
 	}
 	
 	public void tankDrive(double leftValue, double rightValue)//HOW DO I GET MEMES?!??!?
