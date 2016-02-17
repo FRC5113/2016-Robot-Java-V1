@@ -12,6 +12,7 @@ public class Arm
 	
 	private double tiltValueBase;
 	private double tiltValueJoint;
+	private double hookMove;
 	
 	
 	public void init() 
@@ -46,11 +47,21 @@ public class Arm
 		dr.tiltJoint(tiltValueJoint);
 	}
 	
-	public void moveHook()
+	public void moveHook(MotorManager dr, JoystickController monitor)
 	{
+		if(monitor.getHookDrop())
+			hookMove = -.5;
+		else if(monitor.getHookLift())
+				hookMove = .5;
+		else
+			hookMove = 0;
 		
+		dr.moveHook(hookMove);
 	}
 	
+	//Don't put this in until we get the actual robot
+	//put it into a loop checking for top limit switch and until it's hit move hook up
+	//call this in init so the hook is in the right spot every time
 	public void reset()
 	{
 		
