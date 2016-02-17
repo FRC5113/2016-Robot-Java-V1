@@ -99,8 +99,9 @@ public class Robot extends IterativeRobot
         
 		System.out.println("Encoder Raw: " + sensors.getEncoderValues());
 		System.out.println("Encoder Count: " + sensors.getEncoderCount());
-		System.out.println("Encoder Rate: " + sensors.getEncoderRate());
+		System.out.println("Encoder Rate of Rotation: " + sensors.getEncoderRate());
 		System.out.println("Encoder Distance: " + sensors.getEncoderDistance());
+		System.out.println("Degrees per Second: " + sensors.getEncoderAngularSpeed());
 		
 		//System.out.println("StringPot: " + sensors.getStringPot());
 		//System.out.println("Ultrasonic Range Finder (Inches): " + sensors.getSonicRangeInches());

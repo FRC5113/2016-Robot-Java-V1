@@ -111,16 +111,34 @@ public class SensorManager
 		return encoder.getRate();
 	}
 
+	
+	public void getDistancePerPulse(double DistancePerPulse)
+	{
+		encoder.setDistancePerPulse(0.5);
+	}
+	
+	public double getEncoderAngularSpeed()
+	{
+		double PulsePerRotation = 720;
+		double Rate = encoder.getRate();
+		double DistancePerPulse = 0.5;
+		double AngularSpeed = PulsePerRotation * Rate * DistancePerPulse;
+		return AngularSpeed;
+	}
+	
+
 	public void resetEncoder()
 	{
 		encoder.reset();
 	}
+
 
 	public int getEncoderAngle()
 	{
 		encoder.setDistancePerPulse(.5);
 
 		return encoderAngle;
+
 	}
 
 	public double getStringPot()
@@ -142,13 +160,15 @@ public class SensorManager
 		return gyroXY.getAngle();
 	}
 
+
 	public double getGyroZAngle()
 	{
 		return gyroZ.getAngle();
 	}
 
+
+
 }
-
-
+		
 
 
