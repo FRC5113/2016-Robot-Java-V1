@@ -94,18 +94,25 @@ public class Robot extends IterativeRobot
         shoot.update(motorManagers, controller, sensors);
         arm.update(motorManagers, controller);
         
-		System.out.println("Encoder Raw: " + sensors.getEncoderValues());
-		System.out.println("Encoder Count: " + sensors.getEncoderCount());
-		System.out.println("Encoder Rate of Rotation: " + sensors.getEncoderRate());
-		System.out.println("Encoder Distance: " + sensors.getEncoderDistance());
-		System.out.println("Degrees per Second: " + sensors.getEncoderAngularSpeed());
+		//System.out.println("Encoder Raw: " + sensors.getEncoderValues());
+		//System.out.println("Encoder Count: " + sensors.getEncoderCount());
+		//System.out.println("Encoder Rate of Rotation: " + sensors.getEncoderRate());
+		//System.out.println("Encoder Distance: " + sensors.getEncoderDistance());
+		//System.out.println("Degrees per Second: " + sensors.getEncoderAngularSpeed());
 		
 		//System.out.println("StringPot: " + sensors.getStringPot());
 		//System.out.println("Ultrasonic Range Finder (Inches): " + sensors.getSonicRangeInches());
 		//System.out.println("Servo: " + shoot.pusher.getAngle());
 		
-		//System.out.println("Gyro XY: " + sensors.getGyroXYAngle());
-		//System.out.println("Gyro Z: " + sensors.getGyroZAngle());
+		System.out.println("Gyro XY: " + sensors.getGyroXYAngle());
+		System.out.println("Gyro Z: " + sensors.getGyroZAngle()); 
+		
+		sensors.resetGyroAngles(controller);
+		
+		System.out.println("Gyro XY: " + sensors.getGyroXYAngle());
+		System.out.println("Gyro Z: " + sensors.getGyroZAngle()); 
+		
+		
     }
     
     /**

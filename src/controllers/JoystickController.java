@@ -31,6 +31,8 @@ public class JoystickController extends DriveController
 	
 	//private int leftHandedness = 0;
 	
+	private JoystickButton gyroReset;
+	
 	public void init() 
 	{	//The numbers are the USB port that the joysticks are plugged into
 		leftStick = new Joystick(0);//"Beat the devil out of it."
@@ -43,6 +45,8 @@ public class JoystickController extends DriveController
 		
 		reverseControl = new JoystickButton(rightStick, 4);
 		
+		gyroReset = new JoystickButton(rightStick, 11);
+		gyroReset = new JoystickButton(leftStick, 11);
 		
 		servo = new JoystickButton(xboxController, 4);
 		intake = new JoystickButton(xboxController, 3);
@@ -52,6 +56,7 @@ public class JoystickController extends DriveController
 		hookDrop = new JoystickButton (xboxController, 6);
 		emergencyStop = new JoystickButton(xboxController, 7);
 		emergencyStop2 = new JoystickButton(xboxController, 8);
+		
 		
 		//tiltUpJoint = new JoystickButton(xboxController, 8);
 		//tiltDownJoint = new JoystickButton(xboxController, 9);
@@ -164,5 +169,10 @@ public class JoystickController extends DriveController
 	public double getTiltJoint()
 	{
 		return xboxController.getRawAxis(5);
+	}
+	
+	public boolean getGyroReset()
+	{
+		return gyroReset.get();
 	}
 }

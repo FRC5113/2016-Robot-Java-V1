@@ -1,5 +1,6 @@
 package drive;
 
+import controllers.JoystickController;
 import edu.wpi.first.wpilibj.ADXL345_I2C;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
@@ -7,6 +8,8 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.I2C.Port;
 import edu.wpi.first.wpilibj.interfaces.Accelerometer.Range;
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 public class SensorManager
 {
@@ -24,6 +27,10 @@ public class SensorManager
 	private AnalogInput sonicRange;//sonicRAGE
 	
 	private int encoderAngle;
+	
+	private double gyroXYAngle;
+	private double gyroZAngle;
+	
 	
 	public void init()
 	{
@@ -129,6 +136,16 @@ public class SensorManager
 	 public double getGyroZAngle()
 	 {
 		 return gyroZ.getAngle();
+	 }
+	 
+	 public void resetGyroAngles(JoystickController joystick)
+	 {
+		 if(joystick.getGyroReset())
+		 {
+		   gyroXY.reset();
+		   gyroZ.reset();
+		 }
+			 
 	 }
 }
 		
