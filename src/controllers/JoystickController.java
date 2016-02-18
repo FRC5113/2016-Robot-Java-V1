@@ -8,7 +8,6 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 public class JoystickController extends DriveController
 {
-	
 	Joystick leftStick;
 	Joystick rightStick;
 	Joystick xboxController;
@@ -31,6 +30,17 @@ public class JoystickController extends DriveController
 	
 	//private int leftHandedness = 0;
 	
+	private final int xboxA = 1;
+	private final int xboxB = 2;
+	private final int xboxX = 3;
+	private final int xboxY = 4;
+	private final int xboxLB = 5;
+	private final int xboxRB = 6;
+	private final int xboxBACK = 7;
+	private final int xboxSTART = 8;
+	private final int xboxLS = 9;
+	private final int xboxRS = 10;
+	
 	public void init() 
 	{	//The numbers are the USB port that the joysticks are plugged into
 		leftStick = new Joystick(0);//"Beat the devil out of it."
@@ -41,33 +51,23 @@ public class JoystickController extends DriveController
 //		tiltDownShoot = new JoystickButton(xboxController, 2);
 //		tiltUpShoot = new JoystickButton(xboxController, 3);
 		
-		reverseControl = new JoystickButton(rightStick, 4);
+		reverseControl = new JoystickButton(rightStick, xboxY);
 		
 		
-		servo = new JoystickButton(xboxController, 4);
-		intake = new JoystickButton(xboxController, 3);
-		shootLow = new JoystickButton(xboxController, 2);
-		activateAutoShoot = new JoystickButton(xboxController, 1);
-		hookLift = new JoystickButton(xboxController, 5);
-		hookDrop = new JoystickButton (xboxController, 6);
-		emergencyStop = new JoystickButton(xboxController, 7);
-		emergencyStop2 = new JoystickButton(xboxController, 8);
+		servo = new JoystickButton(xboxController, xboxY);
+		intake = new JoystickButton(xboxController, xboxX);
+		shootLow = new JoystickButton(xboxController, xboxB);
+		activateAutoShoot = new JoystickButton(xboxController, xboxA);
+		hookLift = new JoystickButton(xboxController, xboxLB);
+		hookDrop = new JoystickButton (xboxController, xboxRB);
+		emergencyStop = new JoystickButton(xboxController, xboxBACK);
+		emergencyStop2 = new JoystickButton(xboxController, xboxSTART);
 		
 		//tiltUpJoint = new JoystickButton(xboxController, 8);
 		//tiltDownJoint = new JoystickButton(xboxController, 9);
 		
-		//ALL WRONG \/\/\/\/\/\/\/\/\/\/\/\/\/ WHYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY
 		//tiltUpJoint = new JoystickButton(xboxController, 8);
 		//tiltDownJoint = new JoystickButton(xboxController, 9);
-		/*1 = y
-		 *2 = Right Trigger
-		 *3 = Left Trigger
-		 *4 = x
-		 *5 = b
-		 *10 = a
-		 *6 = Start/Stop at same time
-		 *7 = Left Bumper
-		 *11 = Right Bumper */
 		
 		//if (leftHandedness == 1)
 		//{

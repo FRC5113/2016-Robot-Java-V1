@@ -3,6 +3,10 @@
  */
 package controllers;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -217,14 +221,38 @@ public class ShooterSubSystem
 		}
 	}
 	
+	public void storeShooterParams()
+	{
+		try {
+    		f = new File("/home/lvuser/ShooterParameters.txt");
+    		if(!f.exists()){
+    			f.createNewFile();
+    		}
+			fw = new FileWriter(f);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	bw = new BufferedWriter(fw);
+    	
+    	try {
+			bw.write("Hellow, I'm a text file");
+			bw.close();
+			fw.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
 	// Create the ArrayList of AimParameters for the lookup table
 	private ArrayList<AimParameters> aimParmsArrayMap;
 	private static final int MIN_DIST = 2;
 	private static final int DIVS_PER_FOOT = 4;
-
+	private File f;
+	private BufferedWriter bw;
+	private FileWriter fw;
 	
-
 	/**
 	 * @param args
 	 */

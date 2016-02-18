@@ -38,6 +38,9 @@ public class Robot extends IterativeRobot
 	private Shooter shoot;
 	private Arm arm;
 	
+	private boolean autoShootToggle;
+	private double debounce;
+	
 	ShooterSubSystem shooter = new ShooterSubSystem();
 	
 	
@@ -83,7 +86,8 @@ public class Robot extends IterativeRobot
 
     public void teleopInit()
     {
-    	
+    	autoShootToggle = false; 
+    	debounce = -5000;
     }
     
     /**
@@ -97,11 +101,23 @@ public class Robot extends IterativeRobot
         shoot.update(motorManagers, controller, sensors);
         arm.update(motorManagers, controller);
         
-		System.out.println("Encoder Raw: " + sensors.getEncoderValues());
-		System.out.println("Encoder Count: " + sensors.getEncoderCount());
-		System.out.println("Encoder Rate of Rotation: " + sensors.getEncoderRate());
-		System.out.println("Encoder Distance: " + sensors.getEncoderDistance());
-		System.out.println("Degrees per Second: " + sensors.getEncoderAngularSpeed());
+        //Calling autoshoot
+        // if "A" is pressed & it has been at least 5 seconds since last time "A" has been pressed
+        if(controller.getActivateAutoShoot() && System.currentTimeMillis() - debounce > 5000) 
+        {
+        	debounce = System.currentTimeMillis();
+        	autoShootToggle = !autoShootToggle;
+        }
+        
+        if(autoShootToggle)
+        	shoot.autoShoot();
+        	
+        
+		//System.out.println("Encoder Raw: " + sensors.getEncoderValues());
+		//System.out.println("Encoder Count: " + sensors.getEncoderCount());
+		//System.out.println("Encoder Rate of Rotation: " + sensors.getEncoderRate());
+		//System.out.println("Encoder Distance: " + sensors.getEncoderDistance());
+		//System.out.println("Degrees per Second: " + sensors.getEncoderAngularSpeed());
 		
 		//System.out.println("StringPot: " + sensors.getStringPot());
 		//System.out.println("Ultrasonic Range Finder (Inches): " + sensors.getSonicRangeInches());
@@ -110,6 +126,8 @@ public class Robot extends IterativeRobot
 		//System.out.println("Gyro XY: " + sensors.getGyroXYAngle());
 		//System.out.println("Gyro Z: " + sensors.getGyroZAngle());
 		
+        System.out.println("wheel Angle: " + sensors.getEncoderAngle());
+        
 		SmartDashboard.putNumber("Gyro XY", sensors.getGyroXYAngle());
 		SmartDashboard.putNumber("Gyro Z", sensors.getGyroZAngle());
 		SmartDashboard.putNumber("Distance", sensors.getSonicRangeInches());

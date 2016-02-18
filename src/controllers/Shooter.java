@@ -96,7 +96,9 @@ public class Shooter
 	
 	public void autoShoot()//Now is the time to do this. 
 	{
-		
+		/*
+		 * 
+		 */
 	}
 	
 	//We assume that to tilt down we have a negative value and positive to tilt up
