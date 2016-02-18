@@ -16,10 +16,10 @@ public class MotorManager
 	 */
     
     
-	private CANTalon leftMotor1;
-	private CANTalon leftMotor2;
-	private CANTalon rightMotor1;
-	private CANTalon rightMotor2;
+	private CANTalon leftMotorFront;
+	private CANTalon leftMotorBack;
+	private CANTalon rightMotorFront;
+	private CANTalon rightMotorBack;
 	private CANTalon leftTake;
 	private CANTalon rightTake;
 	
@@ -27,7 +27,7 @@ public class MotorManager
 	private CANTalon tiltMotorShoot;
 	
 	//^Lol, same xD
-	private CANTalon tiltMotorArm;
+	private CANTalon tiltMotorArmBase;
 	
 	//^ditto
 	private CANTalon tiltMotorJoint;
@@ -39,37 +39,37 @@ public class MotorManager
 	
 	public void init()
 	{
-		leftMotor1 = new CANTalon(0);//blaze it
-		leftMotor1.set(0);
+		leftMotorFront = new CANTalon(13);//blaze it
+		leftMotorFront.set(0);
 		
-		leftMotor2 = new CANTalon(1);//blaze it
-		leftMotor2.set(0);
+		leftMotorBack = new CANTalon(14);//blaze it
+		leftMotorBack.set(0);
 		
-		rightMotor1 = new CANTalon(2);//leet
-		rightMotor1.set(0);
+		rightMotorFront = new CANTalon(1);//leet
+		rightMotorFront.set(0);
 		
-		rightMotor2 = new CANTalon(3);//leet
-		rightMotor2.set(0);
+		rightMotorBack = new CANTalon(0);//leet
+		rightMotorBack.set(0);
 		
-		tiltMotorShoot = new CANTalon(4);//us
+		tiltMotorShoot = new CANTalon(2);//us
 		tiltMotorShoot.set(0);
 		
-		tiltMotorArm = new CANTalon(5);//Bob Ross
-		tiltMotorArm.set(0);
+		tiltMotorArmBase = new CANTalon(8);//Bob Ross
+		tiltMotorArmBase.set(0);
 		
-		tiltMotorJoint = new CANTalon(6);//not 9/11
+		tiltMotorJoint = new CANTalon(12);//not 9/11
 		tiltMotorJoint.set(0);
 		
 		leftTake = new CANTalon(7);//not quite 9000
 		leftTake.set(0);
 		
-		rightTake = new CANTalon(8);//over 9000
+		rightTake = new CANTalon(6);//over 9000
 		rightTake.set(0);
 		
 		captainHook = new CANTalon(9);//What is a pirate's favorite letter?
 		captainHook.set(0);
 		
-		roboDrive = new RobotDrive(leftMotor1, leftMotor2, rightMotor1, rightMotor2);
+		roboDrive = new RobotDrive(leftMotorFront, leftMotorBack, rightMotorFront, rightMotorBack);
 	}
 	
 	public void tankDrive(double leftValue, double rightValue)//HOW DO I GET MEMES?!??!?
@@ -77,10 +77,10 @@ public class MotorManager
 		double leftPower = leftValue;
 		double rightPower = rightValue;
 		
-		leftMotor1.set(leftPower);
-		leftMotor2.set(leftPower);
-		rightMotor1.set(rightPower);
-		rightMotor2.set(rightPower);
+		leftMotorFront.set(leftPower);
+		leftMotorBack.set(leftPower);
+		rightMotorFront.set(rightPower);
+		rightMotorBack.set(rightPower);
 	}
 	
 	public void tiltShoot(double tiltValue)
@@ -90,7 +90,7 @@ public class MotorManager
 	
 	public void tiltArm(double tiltValue)
 	{
-		tiltMotorArm.set(tiltValue);
+		tiltMotorArmBase.set(tiltValue);
 		
 	}
 	

@@ -42,7 +42,8 @@ public class JoystickController extends DriveController
 	private final int xboxLS = 9;
 	private final int xboxRS = 10;
 
-	private JoystickButton gyroReset;
+	private JoystickButton gyroResetLeft;
+	private JoystickButton gyroResetRight;
 
 	
 	public void init() 
@@ -57,8 +58,8 @@ public class JoystickController extends DriveController
 		
 		reverseControl = new JoystickButton(rightStick, xboxY);
 		
-		gyroReset = new JoystickButton(rightStick, 11);
-		gyroReset = new JoystickButton(leftStick, 11);
+		gyroResetRight = new JoystickButton(rightStick, 11);
+		gyroResetLeft = new JoystickButton(leftStick, 11);
 		
 		servo = new JoystickButton(xboxController, xboxY);
 		intake = new JoystickButton(xboxController, xboxX);
@@ -175,6 +176,7 @@ public class JoystickController extends DriveController
 	
 	public boolean getGyroReset()
 	{
-		return gyroReset.get();
+		return gyroResetLeft.get() || gyroResetRight.get();
+		
 	}
 }
