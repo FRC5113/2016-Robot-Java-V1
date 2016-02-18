@@ -19,6 +19,7 @@ public class JoystickController extends DriveController
 	private JoystickButton intake;
 	private JoystickButton shootLow;
 	private JoystickButton activateAutoShoot;
+	private JoystickButton rumble;
 	private JoystickButton hookLift;
 	private JoystickButton hookDrop;
 	private JoystickButton emergencyStop;
@@ -65,6 +66,7 @@ public class JoystickController extends DriveController
 		intake = new JoystickButton(xboxController, xboxX);
 		shootLow = new JoystickButton(xboxController, xboxB);
 		activateAutoShoot = new JoystickButton(xboxController, xboxA);
+		rumble = new JoystickButton(xboxController, xboxRS);
 		hookLift = new JoystickButton(xboxController, xboxLB);
 		hookDrop = new JoystickButton (xboxController, xboxRB);
 		emergencyStop = new JoystickButton(xboxController, xboxBACK);
@@ -122,6 +124,11 @@ public class JoystickController extends DriveController
 		{
 			dr.tankDrive(leftYAxis, rightYAxis);
 		}
+		
+		if(getRumble())
+		{
+			xboxController.setRumble(kLeftRumble, 0.5);
+		}
 	}
 	
 	public boolean getServo()
@@ -157,6 +164,11 @@ public class JoystickController extends DriveController
 	public boolean getHookLift()
 	{
 		return hookLift.get(); 
+	}
+	
+	public boolean getRumble()
+	{
+		return rumble.get();
 	}
 	
 	public boolean getHookDrop()

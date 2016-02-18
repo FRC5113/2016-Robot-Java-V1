@@ -37,10 +37,10 @@ public class Robot extends IterativeRobot
 	private JoystickController controller;
 	private Shooter shoot;
 	private Arm arm;
+	private ShooterSubSystem SSS;
 	
 
-	private boolean autoShootToggle;
-	private double debounce;
+
 	
 	ShooterSubSystem shooter = new ShooterSubSystem();
 	
@@ -61,6 +61,7 @@ public class Robot extends IterativeRobot
         arm.init();
         sensors = new SensorManager();
         sensors.init();
+        SSS = new ShooterSubSystem();
     }
     
 	/**
@@ -87,8 +88,7 @@ public class Robot extends IterativeRobot
 
     public void teleopInit()
     {
-    	autoShootToggle = false; 
-    	debounce = -5000;
+
     }
     
     /**
@@ -99,20 +99,11 @@ public class Robot extends IterativeRobot
     	//The order of the update methods is important. Besides making a nice slope of periods, the motors and sensors have to update first
         controller.update(motorManagers);
         sensors.update();
-        shoot.update(motorManagers, controller, sensors);
+        shoot.update(motorManagers, controller, sensors, SSS);
         arm.update(motorManagers, controller);
         
 
-        //Calling autoshoot
-        // if "A" is pressed & it has been at least 5 seconds since last time "A" has been pressed
-        if(controller.getActivateAutoShoot() && System.currentTimeMillis() - debounce > 5000) 
-        {
-        	debounce = System.currentTimeMillis();
-        	autoShootToggle = !autoShootToggle;
-        }
         
-        if(autoShootToggle)
-        	shoot.autoShoot();
         	
 		//System.out.println("Encoder Raw: " + sensors.getEncoderValues());
 		//System.out.println("Encoder Count: " + sensors.getEncoderCount());
