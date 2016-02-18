@@ -206,7 +206,7 @@ public class ShooterSubSystem
 		return aP;
 	}
 
-	public void correctVelocity(double k)
+	public void adjustVelocity(double k)
 	{
 		for(int i = 0; i < aimParmsArrayMap.size(); i++)
 		{	

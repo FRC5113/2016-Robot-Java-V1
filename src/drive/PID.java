@@ -3,55 +3,85 @@ package drive;
 public class PID
 {
 	
-	double PIDPosition;
-	double PIDCurrentSpeed;
-	double PIDCurrentTime;
+	double PIDSpeed;
 	double PIDTime;
 	double PIDError;
+    double PIDI;
+    double PIDintegral;
+    double PIDKi;
+    double PIDKd;
+    double PIDKp;
     double PIDErrorPrev;
-    double deviate;
+    
+    double Scurr;
+    double Tcurr;
+    double Ecurr;
+
     double dt;
     double output;
-    double integral;
-    double Kp;
-    double PIDCurrentError;
-    double Ki;
-    double Kd;
-    double Speed;
-    double Current;
-    double Tcurr;
     double PIDCurrent;
-    double delta;
-    double Dirivative;
+    double Derivative;
     double SpeedCurrent;
-    double Iprev;
-    double IntPrev;
-    double Sp;
-    double Tp;
-    double I;
+
     
+    public void init()
+    {
+		PIDTime = System.currentTimeMillis ()/1000 - 1;
+		PIDError = 0;
+		PIDKi = 0;
+		dt = 0;
+	    output = 0;
+	    PIDCurrent = 0;
+	    Derivative = 0;
+	    SpeedCurrent = 0;
+	    Scurr = 0;
+	    Ecurr = 0;
+	    Tcurr = 0;
+	    PIDKd = 0;
+	    PIDKp = 1;
+	    PIDErrorPrev = 0;
+	    PIDI = 0;
+	    PIDintegral = 0;
+	    PIDSpeed = 0;
+    }
     
 	public double UsePID(SensorManager sensors, double desiredSpeed)
 	{
-		PIDCurrentSpeed = sensors.getEncoderRate();
-		PIDCurrentTime = System.currentTimeMillis();
-		PIDCurrentError = desiredSpeed - PIDCurrentSpeed;
-		integral = IntPrev + (PIDCurrentError * ((PIDCurrentTime - PIDTime) /1000));
-		deviate = ((PIDCurrentError - PIDErrorPrev) / dt);
-		output = (Kp * PIDCurrentError) + (Ki * integral) + (Kd * Dirivative);
-		Sp = Speed - Current;
-		Tp = Tcurr;
-		PIDErrorPrev = PIDCurrentError;
-		delta = output - SpeedCurrent/output;
+		Scurr = sensors.getEncoderRate();
+		System.out.println("encoder rate: " + Scurr);
+		Tcurr= System.currentTimeMillis()/1000;
 		
-		if (delta > 0.1)
-			delta = 0.1;
-		if (delta < -0.1)
-			delta = -0.1;
+		//if (Tcurr - PIDTime > .05)
+		//{
+					
+		Ecurr = desiredSpeed - PIDSpeed;
+		dt = Tcurr - PIDTime;
+		//PIDintegral = PIDintegral + (Ecurr * (dt));
+		//Derivative = ((Ecurr- PIDError) / dt);
+		output = (PIDKp * Ecurr) + (PIDKi * PIDintegral) + (PIDKd * Derivative);
+		System.out.println("output: " + output);
+		System.out.println("dt" + dt);
 		
-		I = Iprev * (1 + delta);
-		Iprev = I;
+		PIDError = Ecurr;
+		PIDTime = Tcurr;
+		PIDSpeed = Scurr;
+			
+		if (output > 0.01)
+			output = 0.01;
+		if (output < -0.01)
+			output = -0.01;
 		
-		return I;
+		System.out.println("ayy lmao");
+		System.out.println("");
+		
+		
+		PIDI = PIDI + output;
+		
+		if(PIDI > .99)
+			PIDI = .99;
+		
+		//}
+		
+		return PIDI;
 	}
 }
