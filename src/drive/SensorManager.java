@@ -23,7 +23,9 @@ public class SensorManager
 	
 	private AnalogInput sonicRange;//sonicRAGE
 	
-	private int encoderAngle;
+	//private int encoderAngle;
+	
+	double gyroAngle;
 	
 	public void init()
 	{
@@ -78,6 +80,18 @@ public class SensorManager
 	public double getEncoderRate()
 	{
 		return encoder.getRate();
+	}
+	
+	public double getGyroVoltage(AnalogGyro gyro)
+	{
+		// v = read the voltage from the gyro
+		//
+		return 5;
+	}
+	
+	public void resetGyroAngle()
+	{
+		
 	}
 	
 	public void getDistancePerPulse(double DistancePerPulse)

@@ -89,16 +89,16 @@ public class Robot extends IterativeRobot
     public void teleopPeriodic()
     {
     	//The order of the update methods is important. Besides making a nice slope of periods, the motors and sensors have to update first
-        controller.update(motorManagers);
         sensors.update();
+    	controller.update(motorManagers, sensors);
         shoot.update(motorManagers, controller, sensors);
         arm.update(motorManagers, controller);
         
-		System.out.println("Encoder Raw: " + sensors.getEncoderValues());
-		System.out.println("Encoder Count: " + sensors.getEncoderCount());
-		System.out.println("Encoder Rate of Rotation: " + sensors.getEncoderRate());
-		System.out.println("Encoder Distance: " + sensors.getEncoderDistance());
-		System.out.println("Degrees per Second: " + sensors.getEncoderAngularSpeed());
+		//System.out.println("Encoder Raw: " + sensors.getEncoderValues());
+	//	System.out.println("Encoder Count: " + sensors.getEncoderCount());
+//		System.out.println("Encoder Rate of Rotation: " + sensors.getEncoderRate());
+	//	System.out.println("Encoder Distance: " + sensors.getEncoderDistance());
+		//System.out.println("Degrees per Second: " + sensors.getEncoderAngularSpeed());
 		
 		//System.out.println("StringPot: " + sensors.getStringPot());
 		//System.out.println("Ultrasonic Range Finder (Inches): " + sensors.getSonicRangeInches());
