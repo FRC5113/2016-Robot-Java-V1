@@ -31,7 +31,7 @@ public class Moat extends DefenseFrame
 		case 2:
 			controller.forward(speed2);
 			
-			if(sensors.getGyroZAngle() <= 5 && System.currentTimeMillis() - time >= 5000)
+			if(sensors.getGyroZAngle() <= 5 && System.currentTimeMillis() - time >= 1500)
 				caseSelector = 3;
 			
 			break;
