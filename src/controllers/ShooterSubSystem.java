@@ -184,28 +184,33 @@ public class ShooterSubSystem
 		return aimParmsArrayMap.get(index.intValue());
 	}
 
-	/**
-	 * Update the shooter parameters map at a specific distance. This will allow
-	 * the shooter to be updated without stopping and reloading the robot.
-	 * 
-	 * @param distance
-	 *            - the distance in the map to be updated
-	 * @param velocity
-	 *            - velocity to be updated
-	 * @param angle
-	 *            - angle to be updated
+        /** Update the shooter parameters map at a specific distance. This will allow the shooter to be
+	 * updated without stopping and reloading the robot.
+	 * @param distance - the distance in the map to be updated
+	 * @param velocity - velocity to be updated
+	 * @param angle - angle to be updated
 	 * @return aP - the AimParameter at the index that was updated
 	 */
 	public AimParameters updateArrayMap(Double distance, Double velocity,
 			Double angle)
 	{
-
-		AimParameters aP = new AimParameters(distance, velocity, angle);
+		// First calculate the index into the array list at the requested distance
 		Double index = Math.floor((distance - MIN_DIST) * DIVS_PER_FOOT);
+		
+		// Create a temporary worker variable
+		AimParameters aP = new AimParameters();
 
-		aimParmsArrayMap.set(index.intValue(), aP);
-
+		// Set it with distance, velocity, and angle at the calculated index.
+		// We cannot simply update the array with the .set method using the distance passed in 
+		// because it may not fall on the required 0.25 foot distance increments.
 		aP = aimParmsArrayMap.get(index.intValue());
+		
+		// Do not overwrite distance, only angle and velocity
+		aP.setCarriageTiltAngle(angle);
+		aP.setWheelRotationVelocity(velocity);
+		
+		// Now update the map with the new values
+		aimParmsArrayMap.set(index.intValue(), aP);
 
 		return aP;
 	}
@@ -236,7 +241,11 @@ public class ShooterSubSystem
     	bw = new BufferedWriter(fw);
     	
     	try {
-			bw.write("Hellow, I'm a text file");
+     		for (AimParameters aP : aimParmsArrayMap) {
+     			
+    			bw.write(aP.toString() + "\n");
+    		}
+    		
 			bw.close();
 			fw.close();
 		} catch (IOException e) {
