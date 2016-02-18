@@ -38,6 +38,7 @@ public class Robot extends IterativeRobot
 	private Shooter shoot;
 	private Arm arm;
 	
+
 	private boolean autoShootToggle;
 	private double debounce;
 	
@@ -101,6 +102,7 @@ public class Robot extends IterativeRobot
         shoot.update(motorManagers, controller, sensors);
         arm.update(motorManagers, controller);
         
+
         //Calling autoshoot
         // if "A" is pressed & it has been at least 5 seconds since last time "A" has been pressed
         if(controller.getActivateAutoShoot() && System.currentTimeMillis() - debounce > 5000) 
@@ -112,7 +114,6 @@ public class Robot extends IterativeRobot
         if(autoShootToggle)
         	shoot.autoShoot();
         	
-        
 		//System.out.println("Encoder Raw: " + sensors.getEncoderValues());
 		//System.out.println("Encoder Count: " + sensors.getEncoderCount());
 		//System.out.println("Encoder Rate of Rotation: " + sensors.getEncoderRate());
@@ -123,14 +124,21 @@ public class Robot extends IterativeRobot
 		//System.out.println("Ultrasonic Range Finder (Inches): " + sensors.getSonicRangeInches());
 		//System.out.println("Servo: " + shoot.pusher.getAngle());
 		
-		//System.out.println("Gyro XY: " + sensors.getGyroXYAngle());
-		//System.out.println("Gyro Z: " + sensors.getGyroZAngle());
+		System.out.println("Gyro XY: " + sensors.getGyroXYAngle());
+		System.out.println("Gyro Z: " + sensors.getGyroZAngle()); 
+		
+		sensors.resetGyroAngles(controller);
+		
+		System.out.println("Gyro XY: " + sensors.getGyroXYAngle());
+		System.out.println("Gyro Z: " + sensors.getGyroZAngle()); 
+		
 		
         System.out.println("wheel Angle: " + sensors.getEncoderAngle());
         
 		SmartDashboard.putNumber("Gyro XY", sensors.getGyroXYAngle());
 		SmartDashboard.putNumber("Gyro Z", sensors.getGyroZAngle());
 		SmartDashboard.putNumber("Distance", sensors.getSonicRangeInches());
+
     }
     
     /**

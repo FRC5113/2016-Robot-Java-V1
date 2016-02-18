@@ -1,5 +1,6 @@
 package drive;
 
+import controllers.JoystickController;
 import edu.wpi.first.wpilibj.ADXL345_I2C;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
@@ -7,6 +8,8 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.I2C.Port;
 import edu.wpi.first.wpilibj.interfaces.Accelerometer.Range;
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 public class SensorManager
 {
@@ -35,6 +38,7 @@ public class SensorManager
 	
 	private AnalogInput stringPot;
 	private AnalogInput sonicRange;//SonicRAGE <---- If I ever somehow get partnered with Twitch, I am so making that a sub-emote.
+
 
 	public void init()
 	{
@@ -94,6 +98,18 @@ public class SensorManager
 		return encoder.getRate();
 	}
 	
+	public double getGyroVoltage(AnalogGyro gyro)
+	{
+		// v = read the voltage from the gyro
+		//
+		return 5;
+	}
+	
+	public void resetGyroAngle()
+	{
+		
+	}
+	
 	public void getDistancePerPulse(double DistancePerPulse)
 	{
 		encoder.setDistancePerPulse(0.5);
@@ -140,14 +156,21 @@ public class SensorManager
 	{
 		return gyroXY.getAngle();
 	}
-
-
-	public double getGyroZAngle()
-	{
-		return gyroZ.getAngle();
-	}
-
-
+	
+	 public double getGyroZAngle()
+	 {
+		 return gyroZ.getAngle();
+	 }
+	 
+	 public void resetGyroAngles(JoystickController joystick)
+	 {
+		 if(joystick.getGyroReset())
+		 {
+		   gyroXY.reset();
+		   gyroZ.reset();
+		 }
+			 
+	 }
 
 }
 		
