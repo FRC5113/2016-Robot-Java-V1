@@ -123,6 +123,8 @@ public class Shooter
 		angle = whereToShoot.getCarriageTiltAngle();
 		velocity = whereToShoot.getWheelRotationVelocity();
 		
+		dr.spinShooterWheels(velocity, velocity);
+		
 		
 	}
 	

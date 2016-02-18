@@ -124,11 +124,6 @@ public class JoystickController extends DriveController
 		{
 			dr.tankDrive(leftYAxis, rightYAxis);
 		}
-		
-		if(getRumble())
-		{
-			xboxController.setRumble(kLeftRumble, 0.5);
-		}
 	}
 	
 	public boolean getServo()

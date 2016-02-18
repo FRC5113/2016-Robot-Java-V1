@@ -25,16 +25,8 @@ public class SensorManager
 	
 	AnalogGyro gyroXY;
 	AnalogGyro gyroZ;
-
-	private Encoder encoder;
 	
-	private final double ENCODER_PULSES_PER_REV = 7;
-	private final double MOTOR_TO_GEAR_RATIO = 343;
-	private final double DEGREES_PER_GEAR_REV = 360;
-	private final double MOTOR_REVS_PER_ENCODER_REV = 1;
-	private static double DEGREES_PER_ENCODER_PULSE;
-	
-	private double encoderAngle;
+	public EncoderManager encoder;
 	
 	private AnalogInput stringPot;
 	private AnalogInput sonicRange;//SonicRAGE <---- If I ever somehow get partnered with Twitch, I am so making that a sub-emote.
@@ -48,9 +40,7 @@ public class SensorManager
 		System.out.println("Test for toString(NO toString) of Accelerometer: " + accel);
 		 */
 		//gyroscope
-		DEGREES_PER_ENCODER_PULSE = (MOTOR_REVS_PER_ENCODER_REV/ENCODER_PULSES_PER_REV) * 
-				(MOTOR_REVS_PER_ENCODER_REV/MOTOR_TO_GEAR_RATIO) *
-				(DEGREES_PER_GEAR_REV/MOTOR_REVS_PER_ENCODER_REV);
+
 		
 		gyroXY = new AnalogGyro(0);
 		gyroXY.initGyro();
@@ -59,12 +49,12 @@ public class SensorManager
 		gyroZ = new AnalogGyro(1);
 		gyroZ.initGyro();
 		System.out.println("Gyro Z is now initiated\t" + gyroZ.getAngle());
-				 
-		encoder = new Encoder(0, 1);
 
 		stringPot = new AnalogInput(3);
 
 		sonicRange = new AnalogInput(2);//sonicRage
+		
+		encoder = new EncoderManager(0,1,7,343,360,1);
 
 	}
 
@@ -72,30 +62,6 @@ public class SensorManager
 	{
 		gyroXY.updateTable();
 		gyroZ.updateTable();
-	}
-
-	public int getEncoderValues()
-	{
-		//Not sure which one we should use.
-		//Returns raw value from the encoder.
-		return encoder.getRaw();
-		//Returns the current count from the encoder.
-		//return encoder.get();
-	}
-
-	public double getEncoderDistance()
-	{
-		return encoder.getDistance();
-	}
-
-	public int getEncoderCount()
-	{
-		return encoder.get();
-	}
-
-	public double getEncoderRate()
-	{
-		return encoder.getRate();
 	}
 	
 	public double getGyroVoltage(AnalogGyro gyro)
@@ -108,34 +74,6 @@ public class SensorManager
 	public void resetGyroAngle()
 	{
 		
-	}
-	
-	public void getDistancePerPulse(double DistancePerPulse)
-	{
-		encoder.setDistancePerPulse(0.5);
-	}
-	
-	public double getEncoderAngularSpeed()
-	{
-		double PulsePerRotation = 720;
-		double Rate = encoder.getRate();
-		double DistancePerPulse = 0.5;
-		double AngularSpeed = PulsePerRotation * Rate * DistancePerPulse;
-		return AngularSpeed;
-	}
-	
-
-	public void resetEncoder()
-	{
-		encoder.reset();
-	}
-
-
-	public double getEncoderAngle()
-	{
-		encoderAngle = encoder.get() * DEGREES_PER_ENCODER_PULSE;
-		
-		return encoderAngle;
 	}
 
 	public double getStringPot()
@@ -171,7 +109,6 @@ public class SensorManager
 		 }
 			 
 	 }
-
 }
 		
 

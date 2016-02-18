@@ -47,7 +47,7 @@ public class PID
     
 	public double UsePID(SensorManager sensors, double desiredSpeed)
 	{
-		Scurr = sensors.getEncoderRate();
+		Scurr = sensors.encoder.getEncoderRate();
 		System.out.println("encoder rate: " + Scurr);
 		Tcurr= System.currentTimeMillis()/1000;
 		

@@ -2,14 +2,13 @@
 package org.usfirst.frc.team5113.robot;
 
 import controllers.Arm;
-import controllers.DriveController;
 import controllers.JoystickController;
-import drive.MotorManager;
-import drive.SensorManager;
 import controllers.Shooter;
 import controllers.ShooterSubSystem;
+import drive.EncoderManager;
+import drive.MotorManager;
+import drive.SensorManager;
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.Timer;
 //Auto-added, not sure if we actually need them... but whatever
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -75,7 +74,7 @@ public class Robot extends IterativeRobot
 	 */
     public void autonomousInit() 
     {
-    	sensors.resetEncoder();
+    	sensors.encoder.resetEncoder();
     }
 
     /**
@@ -124,7 +123,7 @@ public class Robot extends IterativeRobot
 		System.out.println("Gyro Z: " + sensors.getGyroZAngle()); 
 		
 		
-        System.out.println("wheel Angle: " + sensors.getEncoderAngle());
+        System.out.println("wheel Angle: " + sensors.encoder.getEncoderAngle());
         
 		SmartDashboard.putNumber("Gyro XY", sensors.getGyroXYAngle());
 		SmartDashboard.putNumber("Gyro Z", sensors.getGyroZAngle());
