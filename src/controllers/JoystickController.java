@@ -19,19 +19,31 @@ public class JoystickController extends DriveController
 	private JoystickButton intake;
 	private JoystickButton shootLow;
 	private JoystickButton activateAutoShoot;
+	
 	private JoystickButton rumble;
 	private JoystickButton hookLift;
 	private JoystickButton hookDrop;
-	private JoystickButton emergencyStop;
-	private JoystickButton emergencyStop2;
 	private JoystickButton tiltArm;
 	//private JoystickButton tiltDownArm;
 	private JoystickButton tiltJoint;
 	//private JoystickButton tiltDownJoint;
+	
+	private JoystickButton emergencyStop;
+	private JoystickButton emergencyStop2;
+	
 	private JoystickButton testAddSmall;
 	private JoystickButton testAddBig;
 	private JoystickButton testSubSmall;
 	private JoystickButton testSubBig;
+	
+	//Shooter Plan B
+	private JoystickButton driverShoot;
+	private JoystickButton driverTiltUp;
+	private JoystickButton driverTiltDown;
+	private JoystickButton driverWheelSpeedUpR;
+	private JoystickButton driverWheelSpeedDownR;
+	private JoystickButton driverWheelSpeedUpL;
+	private JoystickButton driverWheelSpeedDownL;
 	
 	//private int leftHandedness = 0;
 	
@@ -65,6 +77,20 @@ public class JoystickController extends DriveController
 		
 		gyroResetRight = new JoystickButton(rightStick, 11);
 		gyroResetLeft = new JoystickButton(leftStick, 11);
+		testAddSmall = new JoystickButton(rightStick,7);
+		testAddBig = new JoystickButton(rightStick,8);
+		testSubSmall = new JoystickButton(rightStick,9);
+		testSubBig = new JoystickButton(rightStick,10);
+		
+		//shooter plan B
+		 driverShoot = new JoystickButton(rightStick,2);
+		 driverTiltUp = new JoystickButton(rightStick,1);
+		 driverTiltDown = new JoystickButton(leftStick,1);
+		 driverWheelSpeedUpR = new JoystickButton(rightStick,3);
+		 driverWheelSpeedUpL = new JoystickButton(leftStick,3);
+		 driverWheelSpeedDownL = new JoystickButton(leftStick,4);
+		 driverWheelSpeedDownR = new JoystickButton(rightStick,4);
+		
 		
 		servo = new JoystickButton(xboxController, xboxY);
 		intake = new JoystickButton(xboxController, xboxX);
@@ -75,11 +101,6 @@ public class JoystickController extends DriveController
 		hookDrop = new JoystickButton (xboxController, xboxRB);
 		emergencyStop = new JoystickButton(xboxController, xboxBACK);
 		emergencyStop2 = new JoystickButton(xboxController, xboxSTART);
-		
-		testAddSmall = new JoystickButton(rightStick,7);
-		testAddBig = new JoystickButton(rightStick,8);
-		testSubSmall = new JoystickButton(rightStick,9);
-		testSubBig = new JoystickButton(rightStick,10);
 		
 		
 		//tiltUpJoint = new JoystickButton(xboxController, 8);
@@ -190,10 +211,34 @@ public class JoystickController extends DriveController
 		return xboxController.getRawAxis(5);
 	}
 	
+	public boolean getDriverShoot()
+	{
+		return driverShoot.get();
+	}
+	
+	public boolean getDriverTiltUp()
+	{
+		return driverTiltUp.get();
+	}
+	
+	public boolean getDriverTiltDown()
+	{
+		return driverTiltDown.get();
+	}
+	
+	public boolean getDriverSpeedWheelsUp()
+	{
+		return driverWheelSpeedUpL.get() || driverWheelSpeedUpR.get();
+	}
+	
+	public boolean getDriverSpeedWheelsDown()
+	{
+		return driverWheelSpeedDownR.get() || driverWheelSpeedDownL.get();
+	}
+	
 	public boolean getGyroReset()
 	{
 		return gyroResetLeft.get() || gyroResetRight.get();
-		
 	}
 	
 	public double testValue(double originalValue, double incrementValue)
