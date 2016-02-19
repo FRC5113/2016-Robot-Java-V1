@@ -17,6 +17,7 @@ public class Drawbridge extends DefenseFrame									// it's a boi
 	private double basedegrees1 = 30.0;//test numbers
 	private double basedegrees2 = 20.0; //test numbers
 	private double shooterangle = 10.0; //test numbers
+
 	private double time;
 	
 	MotorManager dr;
@@ -31,6 +32,7 @@ public class Drawbridge extends DefenseFrame									// it's a boi
 		
 		switch(caseSelector)
 		{
+
 		case 1: //Approach the defense          ______
 			controller.forward(speed1);    //   |     |
 			//									V     | 
@@ -41,9 +43,9 @@ public class Drawbridge extends DefenseFrame									// it's a boi
 				//time = System.currentTimeMillis();
 			} 
 			
-			break;
+				break;
 			
-		case 2: // Manage arm movement and prepare to cross - steps 3-7 on sheet
+			case 2: // Manage arm movement and prepare to cross - steps 3-7 on sheet
 				//Lower arm
 				//Move backward
 				//Lower arm further
@@ -130,7 +132,7 @@ public class Drawbridge extends DefenseFrame									// it's a boi
 				caseSelector=5;
 			}
 			
-			break;
+				break;
 			
 			
 		case 5:
@@ -158,10 +160,11 @@ public class Drawbridge extends DefenseFrame									// it's a boi
 			break;
 			
 		case 8: // Stop
+
 			
-			controller.stop();
-			System.out.println("Done!");
-			break;
+				controller.stop();
+				System.out.println("Done!");
+				break;
 		}
 	}
 }

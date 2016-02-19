@@ -69,7 +69,7 @@ public class MotorManager
 		captainHook = new CANTalon(9);//What is a pirate's favorite letter?
 		captainHook.set(0);
 		
-		roboDrive = new RobotDrive(leftMotorFront, leftMotorBack, rightMotorFront, rightMotorBack);
+		roboDrive = new RobotDrive(rightMotorBack, leftMotorBack);
 	}
 	
 	public void tankDrive(double leftValue, double rightValue)//HOW DO I GET MEMES?!??!?

@@ -28,6 +28,10 @@ public class JoystickController extends DriveController
 	//private JoystickButton tiltDownArm;
 	private JoystickButton tiltJoint;
 	//private JoystickButton tiltDownJoint;
+	private JoystickButton testAddSmall;
+	private JoystickButton testAddBig;
+	private JoystickButton testSubSmall;
+	private JoystickButton testSubBig;
 	
 	//private int leftHandedness = 0;
 	
@@ -71,6 +75,11 @@ public class JoystickController extends DriveController
 		hookDrop = new JoystickButton (xboxController, xboxRB);
 		emergencyStop = new JoystickButton(xboxController, xboxBACK);
 		emergencyStop2 = new JoystickButton(xboxController, xboxSTART);
+		
+		testAddSmall = new JoystickButton(rightStick,7);
+		testAddBig = new JoystickButton(rightStick,8);
+		testSubSmall = new JoystickButton(rightStick,9);
+		testSubBig = new JoystickButton(rightStick,10);
 		
 		
 		//tiltUpJoint = new JoystickButton(xboxController, 8);
@@ -185,5 +194,21 @@ public class JoystickController extends DriveController
 	{
 		return gyroResetLeft.get() || gyroResetRight.get();
 		
+	}
+	
+	public double testValue(double originalValue, double incrementValue)
+	{
+		double newValue = originalValue;
+		
+		if(testAddSmall.get())
+			newValue += incrementValue;
+		else if(testAddBig.get())
+				newValue += (incrementValue * 10);
+		else if(testSubSmall.get())
+				newValue -= incrementValue;
+		else if(testSubBig.get())
+				newValue -= (incrementValue * 10);
+		
+		return newValue;
 	}
 }
