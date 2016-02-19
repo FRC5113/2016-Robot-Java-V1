@@ -15,6 +15,8 @@ public class EncoderManager
 	
 	private double encoderAngle;
 	
+	MotorManager dr;
+	
 	//Shooter wheels are 2 inch radius
 	
 	public EncoderManager(int portOne, int portTwo, double pulsesPerRev, double motorGearRatio, 
@@ -81,20 +83,20 @@ public class EncoderManager
 		return encoderAngle;
 	}
 	
-	public double setShooterAngle(double requestedAngle)
-	{
-		if(requestedAngle > getEncoderAngle())
+	public void setShooterAngle(double requestedAngle)
+	 {
+		if(requestedAngle == getEncoderAngle())
 		 {
-			 return -.5;			//plz test numbers
+			 dr.spinShooterWheels(0.0, 0.0); 
+		 }
+		else if(requestedAngle > getEncoderAngle())
+		 {
+			 dr.spinShooterWheels(-0.5, -0.5);			//plz test numbers
 		 }
 		else if(requestedAngle < getEncoderAngle())
 		 {
-			 return .5;			 //plz test numbers
+			 dr.spinShooterWheels(0.5, 0.5);			//plz test numbers
 		 }
-		else
-		{
-			return 0;
-		}
-	}
+	 }
 
 }

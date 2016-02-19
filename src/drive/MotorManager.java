@@ -67,8 +67,7 @@ public class MotorManager
 		rightTake.set(0);
 		
 		captainHook = new CANTalon(9);//What is a pirate's favorite letter?
-		captainHook.set(0);			  //"It's p because without it he'd be irate" 
-																//-Wang 2016
+		captainHook.set(0);
 		
 		roboDrive = new RobotDrive(rightMotorBack, leftMotorBack);
 	}
