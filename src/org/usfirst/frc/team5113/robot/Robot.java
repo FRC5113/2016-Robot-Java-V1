@@ -116,19 +116,12 @@ public class Robot extends IterativeRobot
 		
 		sensors.resetGyroAngles(controller);
 		
-<<<<<<< HEAD
-		//System.out.println("Gyro XY: " + sensors.getGyroXYAngle());
-		//System.out.println("Gyro Z: " + sensors.getGyroZAngle()); 
-
-
-		//System.out.println("wheel Angle: " + sensors.getEncoderAngle());
-=======
 		System.out.println("Gyro XY: " + sensors.getGyroXYAngle());
 		System.out.println("Gyro Z: " + sensors.getGyroZAngle()); 
 		
 		
         System.out.println("wheel Angle: " + sensors.encoder.getEncoderAngle());
->>>>>>> origin/master
+
         
 		SmartDashboard.putNumber("Gyro XY", sensors.getGyroXYAngle());
 		SmartDashboard.putNumber("Gyro Z", sensors.getGyroZAngle());
