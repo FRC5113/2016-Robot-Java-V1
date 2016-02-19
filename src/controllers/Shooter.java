@@ -34,6 +34,7 @@ public class Shooter
 	private double velocity;
 	private AimParameters whereToShoot;
 	private PID pid;
+	private double tiltSpeed;
 	
 	//instantiate objects with obviously fake ports
 	//Done
@@ -131,9 +132,10 @@ public class Shooter
 		angle = whereToShoot.getCarriageTiltAngle();
 		velocity = whereToShoot.getWheelRotationVelocity();
 		
+		tiltSpeed = sensors.encoder.setShooterAngle(angle);
+		dr.tiltShoot(tiltSpeed);
+		
 		dr.spinShooterWheels(velocity, velocity);
-		
-		
 	}
 	
 	//We assume that to tilt down we have a negative value and positive to tilt up
