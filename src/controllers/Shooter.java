@@ -35,8 +35,6 @@ public class Shooter
 	private AimParameters whereToShoot;
 	private PID pid;
 	
-	private double driverSpinWheelsSpeed;
-	
 	//instantiate objects with obviously fake ports
 	//Done
 	public void init()
@@ -54,8 +52,6 @@ public class Shooter
     	
     	pid = new PID();
     	pid.init();
-    	
-    	driverSpinWheelsSpeed = .5;
 	}
 	
 	//It requires dr for motor access, monitor for stick access and sensors for sensor access (Especially for auto-shoot)
@@ -63,10 +59,6 @@ public class Shooter
 	{
 		manualTilt(dr, monitor);
 		manualWheels(dr, monitor);
-		
-		//Shooter Plan B just in case everything goes 
-		if(!autoShootToggle)
-			manualDriverShootAndAim(dr, monitor);
 		
 		//Calling autoshoot
         // if "A" is pressed & it has been at least 5 seconds since last time "A" has been pressed
@@ -163,36 +155,6 @@ public class Shooter
 		}
 		
 		dr.tiltShoot(tiltValue);
-	}
-	
-	public void manualDriverShootAndAim(MotorManager dr, JoystickController monitor)
-	{
-		if(monitor.getDriverSpeedWheelsUp())
-		{
-			driverSpinWheelsSpeed += .1;
-		}
-		else if(monitor.getDriverSpeedWheelsDown())
-			{
-				driverSpinWheelsSpeed -= .1;
-			}
-		
-		if(monitor.getDriverTiltUp())
-		{
-			dr.tiltShoot(.5);
-		}
-		else if(monitor.getDriverTiltDown())
-			{
-				dr.tiltShoot(-.5);
-			}
-		
-		if(monitor.getDriverShoot())
-		{
-			dr.spinShooterWheels(driverSpinWheelsSpeed, driverSpinWheelsSpeed);
-		}
-		else
-		{
-			dr.spinShooterWheels(0, 0);
-		}
 	}
 	
 }
