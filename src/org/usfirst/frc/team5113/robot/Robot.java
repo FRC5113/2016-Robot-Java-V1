@@ -2,14 +2,13 @@
 package org.usfirst.frc.team5113.robot;
 
 import controllers.Arm;
-import controllers.DriveController;
 import controllers.JoystickController;
-import drive.MotorManager;
-import drive.SensorManager;
 import controllers.Shooter;
 import controllers.ShooterSubSystem;
+import drive.EncoderManager;
+import drive.MotorManager;
+import drive.SensorManager;
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.Timer;
 //Auto-added, not sure if we actually need them... but whatever
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -37,10 +36,10 @@ public class Robot extends IterativeRobot
 	private JoystickController controller;
 	private Shooter shoot;
 	private Arm arm;
+	private ShooterSubSystem SSS;
 	
 
-	private boolean autoShootToggle;
-	private double debounce;
+
 	
 	ShooterSubSystem shooter = new ShooterSubSystem();
 	
@@ -61,6 +60,7 @@ public class Robot extends IterativeRobot
         arm.init();
         sensors = new SensorManager();
         sensors.init();
+        SSS = new ShooterSubSystem();
     }
     
 	/**
@@ -74,7 +74,7 @@ public class Robot extends IterativeRobot
 	 */
     public void autonomousInit() 
     {
-    	sensors.resetEncoder();
+    	sensors.encoder.resetEncoder();
     }
 
     /**
@@ -87,8 +87,7 @@ public class Robot extends IterativeRobot
 
     public void teleopInit()
     {
-    	autoShootToggle = false; 
-    	debounce = -5000;
+
     }
     
     /**
@@ -99,20 +98,11 @@ public class Robot extends IterativeRobot
     	//The order of the update methods is important. Besides making a nice slope of periods, the motors and sensors have to update first
         controller.update(motorManagers);
         sensors.update();
-        shoot.update(motorManagers, controller, sensors);
+        shoot.update(motorManagers, controller, sensors, SSS);
         arm.update(motorManagers, controller);
         
 
-        //Calling autoshoot
-        // if "A" is pressed & it has been at least 5 seconds since last time "A" has been pressed
-        if(controller.getActivateAutoShoot() && System.currentTimeMillis() - debounce > 5000) 
-        {
-        	debounce = System.currentTimeMillis();
-        	autoShootToggle = !autoShootToggle;
-        }
         
-        if(autoShootToggle)
-        	shoot.autoShoot();
         	
 		//System.out.println("Encoder Raw: " + sensors.getEncoderValues());
 		//System.out.println("Encoder Count: " + sensors.getEncoderCount());
@@ -126,11 +116,19 @@ public class Robot extends IterativeRobot
 		
 		sensors.resetGyroAngles(controller);
 		
+<<<<<<< HEAD
 		//System.out.println("Gyro XY: " + sensors.getGyroXYAngle());
 		//System.out.println("Gyro Z: " + sensors.getGyroZAngle()); 
 
 
 		//System.out.println("wheel Angle: " + sensors.getEncoderAngle());
+=======
+		System.out.println("Gyro XY: " + sensors.getGyroXYAngle());
+		System.out.println("Gyro Z: " + sensors.getGyroZAngle()); 
+		
+		
+        System.out.println("wheel Angle: " + sensors.encoder.getEncoderAngle());
+>>>>>>> origin/master
         
 		SmartDashboard.putNumber("Gyro XY", sensors.getGyroXYAngle());
 		SmartDashboard.putNumber("Gyro Z", sensors.getGyroZAngle());

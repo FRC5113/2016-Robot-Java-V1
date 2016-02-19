@@ -37,7 +37,6 @@ public class Arm
 		tiltValueBase = monitor.getTiltArm();
 	
 		dr.tiltArm(tiltValueBase);
-		dr.tiltJoint(tiltValueBase);
 	}
 	
 	public void tiltJoint(MotorManager dr, JoystickController monitor)

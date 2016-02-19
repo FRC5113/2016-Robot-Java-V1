@@ -262,6 +262,12 @@ public class ShooterSubSystem
 	private BufferedWriter bw;
 	private FileWriter fw;
 	
+	
+	public int arrayLength()
+	{
+		return aimParmsArrayMap.size();
+	}
+	
 	/**
 	 * @param args
 	 */

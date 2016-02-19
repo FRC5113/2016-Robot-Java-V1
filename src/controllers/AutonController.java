@@ -13,6 +13,7 @@ public class AutonController extends DriveController
 {	
 	private int caseSelector = 1;
 	private double leftMotor, rightMotor;
+	private double tiltMotorArm, tiltMotorShoot;
 	
 	
 	Moat moat;
@@ -62,5 +63,19 @@ public class AutonController extends DriveController
 		leftMotor = 0;
 		rightMotor = 0;
 	}
+	
+	
+
+	public void shootswing(double speed)
+	{
+		tiltMotorShoot = speed;
+	}
+	
+	public void armswing(double speed)
+	{
+		tiltMotorArm = speed;
+	}
+
+
 	
 }

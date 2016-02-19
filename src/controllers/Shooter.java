@@ -1,16 +1,13 @@
 package controllers;
 
 import drive.MotorManager;
+import drive.PID;
 import drive.SensorManager;
-import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Servo;
-import edu.wpi.first.wpilibj.Joystick.RumbleType;
 
 public class Shooter
 {
-	
 	//Not sure if "DigitalInput" is the correct object
 	//it is -Reed
 	private DigitalInput maxAngle;
@@ -28,6 +25,16 @@ public class Shooter
 	private double timer;
 	private int servoDir;
 	
+	private boolean autoShootToggle;
+	private double debounce;
+	
+	private double distance;
+	private double index;
+	private double angle;
+	private double velocity;
+	private AimParameters whereToShoot;
+	private PID pid;
+	
 	//instantiate objects with obviously fake ports
 	//Done
 	public void init()
@@ -39,13 +46,35 @@ public class Shooter
 		pusher.setAngle(0);
 		
 		servoDir = 1;
+		
+    	autoShootToggle = false; 
+    	debounce = -5000;
+    	
+    	pid = new PID();
+    	pid.init();
 	}
 	
 	//It requires dr for motor access, monitor for stick access and sensors for sensor access (Especially for auto-shoot)
-	public void update(MotorManager dr, JoystickController monitor, SensorManager sensors)
+	public void update(MotorManager dr, JoystickController monitor, SensorManager sensors, ShooterSubSystem SSS)
 	{
 		manualTilt(dr, monitor);
 		manualWheels(dr, monitor);
+		
+		//Calling autoshoot
+        // if "A" is pressed & it has been at least 5 seconds since last time "A" has been pressed
+        /*if(monitor.getActivateAutoShoot() && System.currentTimeMillis() - debounce > 5000) 
+        {
+        	debounce = System.currentTimeMillis();
+        	autoShootToggle = !autoShootToggle;
+        }
+        
+        if(autoShootToggle)
+        	autoShoot(SSS, sensors, dr);
+		*/
+		
+		double speed = pid.UsePID(sensors, 750);
+		System.out.println("PID: " + speed);
+		dr.tankDrive(.4, .4);
 		
 		/*s e r v o 
 		  e 
@@ -94,11 +123,17 @@ public class Shooter
 			dr.spinShooterWheels(0, 0);
 	}
 	
-	public void autoShoot()//Now is the time to do this. 
+	public void autoShoot(ShooterSubSystem SSS, SensorManager sensors, MotorManager dr)//Now is the time to do this. 
 	{
-		/*
-		 * 
-		 */
+		distance = sensors.getSonicRangeInches();
+		whereToShoot = SSS.getAimParmFromArray(distance);
+		
+		angle = whereToShoot.getCarriageTiltAngle();
+		velocity = whereToShoot.getWheelRotationVelocity();
+		
+		dr.spinShooterWheels(velocity, velocity);
+		
+		
 	}
 	
 	//We assume that to tilt down we have a negative value and positive to tilt up
