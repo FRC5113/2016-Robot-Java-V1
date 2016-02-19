@@ -49,6 +49,9 @@ public class Shooter
 		
     	autoShootToggle = false; 
     	debounce = -5000;
+    	
+    	pid = new PID();
+    	pid.init();
 	}
 	
 	//It requires dr for motor access, monitor for stick access and sensors for sensor access (Especially for auto-shoot)
@@ -59,7 +62,7 @@ public class Shooter
 		
 		//Calling autoshoot
         // if "A" is pressed & it has been at least 5 seconds since last time "A" has been pressed
-        if(monitor.getActivateAutoShoot() && System.currentTimeMillis() - debounce > 5000) 
+        /*if(monitor.getActivateAutoShoot() && System.currentTimeMillis() - debounce > 5000) 
         {
         	debounce = System.currentTimeMillis();
         	autoShootToggle = !autoShootToggle;
@@ -67,6 +70,11 @@ public class Shooter
         
         if(autoShootToggle)
         	autoShoot(SSS, sensors, dr);
+		*/
+		
+		double speed = pid.UsePID(sensors, 750);
+		System.out.println("PID: " + speed);
+		dr.tankDrive(.4, .4);
 		
 		/*s e r v o 
 		  e 

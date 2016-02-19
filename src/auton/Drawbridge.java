@@ -7,7 +7,7 @@ public class Drawbridge extends DefenseFrame									// it's a boi
 	private int caseSelector;													//      |
 	private boolean selectorCheck = false;										//      |
 	private double speed1 = 0.5;												// 		|
-	private double speed2 = 1.0;												//		V
+	private double speed2 = 0.2;												//		V
 	private double speed3 = 0.5;
 	private double degrees = 20.0;
 	private double time;
@@ -20,18 +20,18 @@ public class Drawbridge extends DefenseFrame									// it's a boi
 		
 		switch(caseSelector)
 		{
-		case 1: //Approach the defense          ______
-			controller.forward(speed1);    //   |     |
-			//									V     | 
-			if(sensors.getSonicRangeInches() == 6) //How far away from the drawbridge to stop
-			{
-				caseSelector = 2;
-				//time = System.currentTimeMillis();
-			} 
+			case 1: //Approach the defense          ______
+				controller.forward(speed1);    //   |     |
+				//									V     | 
+				if(sensors.getSonicRangeInches() == 6) //How far away from the drawbridge to stop
+				{
+					caseSelector = 2;
+					//time = System.currentTimeMillis();
+				} 
 			
-			break;
+				break;
 			
-		case 2: // Manage arm movement and prepare to cross - steps 3-7 on sheet
+			case 2: // Manage arm movement and prepare to cross - steps 3-7 on sheet
 				//Lower arm
 				//Move backward
 				//Lower arm further
@@ -45,29 +45,29 @@ public class Drawbridge extends DefenseFrame									// it's a boi
 			
 				
 			
-			break;
+				break;
 			
-		case 3: 
-			controller.shootswing(-speed3);
-			if (sensors.getGyroZAngle() < -5)
-			{
-				caseSelector = 4;
-			}
-			break;
+			case 3: 
+				controller.shootswing(-speed3);
+				if (sensors.getGyroZAngle() < -5)
+				{
+					caseSelector = 4;
+				}
+				break;
 		
-		case 4:
-			controller.forward(speed1);
-			if (sensors.getGyroZAngle() == 0)
-			{
-				caseSelector = 5;
-			}
-			break;
+			case 4:
+				controller.forward(speed1);
+				if (sensors.getGyroZAngle() == 0)
+				{
+					caseSelector = 5;
+				}
+				break;
 			
-		case 5: // Stop
+			case 5: // Stop
 			
-			controller.stop();
-			System.out.println("Done!");
-			break;
+				controller.stop();
+				System.out.println("Done!");
+				break;
 		}
 	}
 }
