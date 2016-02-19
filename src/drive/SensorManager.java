@@ -59,6 +59,10 @@ public class SensorManager
 		gyroZ = new AnalogGyro(1);
 		gyroZ.initGyro();
 		System.out.println("Gyro Z is now initiated\t" + gyroZ.getAngle());
+		
+		gyroXY.calibrate();
+		gyroZ.calibrate();
+		System.out.println("The Gyro's are now calibrated.");
 				 
 		encoder = new Encoder(0, 1);
 
@@ -170,6 +174,17 @@ public class SensorManager
 		   gyroZ.reset();
 		 }
 			 
+	 }
+	 
+	 public double getMedianRangefinder()
+	 {
+		 //make an array for the rangefinder of some odd number of inputs
+		 //replace the last position with the most recent entry, so throw out the first and add the last
+		 //median value of it and return it 
+		 
+		 
+		 
+		 return ;
 	 }
 
 }

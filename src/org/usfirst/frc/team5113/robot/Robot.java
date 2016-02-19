@@ -121,19 +121,16 @@ public class Robot extends IterativeRobot
 		//System.out.println("Degrees per Second: " + sensors.getEncoderAngularSpeed());
 		
 		//System.out.println("StringPot: " + sensors.getStringPot());
-		//System.out.println("Ultrasonic Range Finder (Inches): " + sensors.getSonicRangeInches());
+		System.out.println("Ultrasonic Range Finder (Inches): " + sensors.getSonicRangeInches());
 		//System.out.println("Servo: " + shoot.pusher.getAngle());
-		
-		System.out.println("Gyro XY: " + sensors.getGyroXYAngle());
-		System.out.println("Gyro Z: " + sensors.getGyroZAngle()); 
 		
 		sensors.resetGyroAngles(controller);
 		
-		System.out.println("Gyro XY: " + sensors.getGyroXYAngle());
-		System.out.println("Gyro Z: " + sensors.getGyroZAngle()); 
-		
-		
-        System.out.println("wheel Angle: " + sensors.getEncoderAngle());
+		//System.out.println("Gyro XY: " + sensors.getGyroXYAngle());
+		//System.out.println("Gyro Z: " + sensors.getGyroZAngle()); 
+
+
+		//System.out.println("wheel Angle: " + sensors.getEncoderAngle());
         
 		SmartDashboard.putNumber("Gyro XY", sensors.getGyroXYAngle());
 		SmartDashboard.putNumber("Gyro Z", sensors.getGyroZAngle());
