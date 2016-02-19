@@ -10,35 +10,69 @@ public class QuickSort
 	 * Main method.
 	 * @param args
 	 */
-	public static void main(String[] args){
+	private int arraySize;
+	private int currentIndex = 0;
+	//private ArrayList<Double> array;
+	
+	private Double[] array;
 
-		QuickSort app = new QuickSort();
-		
-		 //Generate an integer array of length 7
-	    List<Integer> input = app.generateRandomNumbers(8);
-		
-	    //Before sort
-	    System.out.println(input);
-		
-	    //After sort
-	    List<Integer> sortedData = app.sortData(input);
-	    System.out.println(sortedData);
-	    
-	    input = app.updateInput(input, 4);
-	    sortedData = app.sortData(input);
-	    System.out.println(input);
-	    System.out.println(sortedData);
-	    System.out.println(app.findMedian(sortedData));
-	    
-	    
+	public QuickSort(int size){
+		this.arraySize = size;
+		//this.array = new ArrayList<Double>(size);
+		array = new Double [size];
 	}
 	
-	private int findMedian(List<Integer> sortedData){
+	public static void main(String[] args){
+
+		QuickSort app = new QuickSort(2);
+		
+
+		 //Generate an integer array of length 7
+	    ArrayList<Double> input = app.generateRandomNumbers(8);
+		
+	    //Before sort
+	    System.out.println("input before\t" + input);
+	    
+	    //After sort
+	    ArrayList<Double> sortedData = app.sortData(input);
+	  
+//	    input = app.updateInput(input, 4);
+	    app.addNewMeasurement(99.987);
+	    sortedData = app.sortData(input);
+	    
+	    System.out.println("input after addition\t" + input);
+	    System.out.println("sortedData\t" + sortedData);
+	    
+	    System.out.println("Median\t" + app.findMedian(sortedData));
+	    
+	    //System.out.println("sortedData" + sortedData);
+	    
+	    
+	    app.addNewMeasurement(4.909);
+	    app.addNewMeasurement(3.67);
+	    app.addNewMeasurement(4.768);
+	    app.addNewMeasurement(2.665);
+	    app.addNewMeasurement(6.321);
+	    app.addNewMeasurement(6.883);
+	    app.addNewMeasurement(1.332);
+	    app.addNewMeasurement(4.768);
+	    
+	    System.out.println("Array output\t" + app.array);
+	    
+	    app.addNewMeasurement(9.765);
+	    app.addNewMeasurement(99.99);
+	    
+	    System.out.println("Array output after return to index 0\t" + app.array);
+	}
+	
+	private Double findMedian(ArrayList<Double> sortedData){
 		//assumes sortedData.size() != 0, >= 2
 		if (sortedData.size() % 2 == 0){
-			int medLoc1 = sortedData.size() / 2;
-			int medLoc2 = medLoc1 - 1;
-			return (sortedData.get(medLoc1) + sortedData.get(medLoc2)) / 2;
+			Integer medLoc1 = sortedData.size() / 2;
+			Integer medLoc2 = medLoc1 - 1;
+			
+			Double median = (sortedData.get(medLoc1) + sortedData.get(medLoc2)) / 2;
+			return median;
 		}
 		else{
 			int medLoc = (sortedData.size() - 1) / 2;
@@ -46,14 +80,14 @@ public class QuickSort
 		}
 	}
 	
-	private List<Integer> updateInput(List<Integer> input, int i){
+/*	private ArrayList<Double> updateInput(ArrayList<Double> input, double i){
 		input.remove(0);
 		input.add(i);
 		return input;
-	}
+	}*/
 	
-	private List<Integer> sortData(List<Integer> input){
-		List<Integer> sortedData = new ArrayList<Integer>();
+	private ArrayList<Double> sortData(List<Double> input){
+		ArrayList<Double> sortedData = new ArrayList<Double>();
 	    for (int i = 0; i < input.size(); i++){
 	    	sortedData.add(input.get(i));
 	    }
@@ -66,17 +100,18 @@ public class QuickSort
 	 * @param input the ArrayList of integers.
 	 * @return sorted ArrayList of integers.
 	 */
-	private List<Integer> quicksort(List<Integer> input){
+	private ArrayList<Double> quicksort(ArrayList<Double> input){
 		
 		if(input.size() <= 1){
 			return input;
 		}
 		
-		int middle = (int) Math.ceil((double)input.size() / 2);
-		int pivot = input.get(middle);
+		//Integer middle = (Integer)Math.ceil(input.size() / 2);
+		Integer middle = input.size() / 2;
+		Double pivot =  input.get(middle);
 
-		List<Integer> less = new ArrayList<Integer>();
-		List<Integer> greater = new ArrayList<Integer>();
+		ArrayList<Double> less = new ArrayList<Double>();
+		ArrayList<Double> greater = new ArrayList<Double>();
 		
 		for (int i = 0; i < input.size(); i++) {
 			if(input.get(i) <= pivot){
@@ -101,9 +136,9 @@ public class QuickSort
 	 * @param greater integer ArrayList with values greater than pivot.
 	 * @return the integer ArrayList after join.
 	 */
-	private List<Integer> concatenate(List<Integer> less, int pivot, List<Integer> greater){
+	private ArrayList<Double> concatenate(ArrayList<Double> less, Double pivot, ArrayList<Double> greater){
 		
-		List<Integer> list = new ArrayList<Integer>();
+		ArrayList<Double> list = new ArrayList<Double>();
 		
 		for (int i = 0; i < less.size(); i++) {
 			list.add(less.get(i));
@@ -123,16 +158,32 @@ public class QuickSort
 	 * @param n the length of the ArrayList to generate.
 	 * @return ArrayList of random integers with length n. 
 	 */
-	private List<Integer> generateRandomNumbers(int n){
+	private ArrayList<Double> generateRandomNumbers(int n){
 		
-	    List<Integer> list = new ArrayList<Integer>(n);
+	    ArrayList<Double> list = new ArrayList<Double>(n);
 	    Random random = new Random();
 		
 	    for (int i = 0; i < n; i++) {
-		    list.add(random.nextInt(n * 10));
+		    //list.add(random.nextInt(n * 10));
+	    	list.add(random.nextDouble() * 10);
 	    }
 	
 	    return list;
 	}
+	
+	public void addNewMeasurement(Double range)
+	{
+		if(currentIndex >= array.length)
+			currentIndex = 0;
+
+//		if(currentIndex < arraySize)
+			array[currentIndex] = range;
+				
+		//increment index
+		currentIndex += 1;
+		//if index is > array size set index = 0;
+	}
+	
+	
 
 }
